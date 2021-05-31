@@ -21,7 +21,7 @@ public class Termin implements Serializable {
     private Trening trening;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Trening sala;
+    private Sala sala;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private FitnessCentar fitnessCentar;
@@ -61,11 +61,11 @@ public class Termin implements Serializable {
         this.trening = trening;
     }
 
-    public Trening getSala() {
+    public Sala getSala() {
         return sala;
     }
 
-    public void setSala(Trening sala) {
+    public void setSala(Sala sala) {
         this.sala = sala;
     }
 
