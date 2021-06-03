@@ -23,7 +23,7 @@ public class TreningController {
         this.treningService = treningService;
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)      //dobavljanje po id-u
     public ResponseEntity<TreningDTO> getTrening(@PathVariable("id") Long id){
         Trening trening = this.treningService.findOne(id);
 
@@ -36,4 +36,5 @@ public class TreningController {
 
         return new ResponseEntity<>(treningDTO, HttpStatus.OK);
     }
+
 }
