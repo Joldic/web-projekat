@@ -38,6 +38,9 @@ public class FitnessCentar implements Serializable {
         this.brojTelefonaCentrale = brojTelefonaCentrale;
         this.eMail = eMail;
     }
+    public FitnessCentar(){
+
+    }
 
     public Long getId() {
         return id;

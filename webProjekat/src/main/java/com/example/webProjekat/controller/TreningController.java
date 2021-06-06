@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/trening")
 public class TreningController {
@@ -37,4 +40,17 @@ public class TreningController {
         return new ResponseEntity<>(treningDTO, HttpStatus.OK);
     }
 
+    //dobavljanje liste svih treninga
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TreningDTO>> getTreninzi(){
+        List<Trening> treningList = this.treningService.findAll();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
 }
