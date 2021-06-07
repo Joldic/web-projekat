@@ -53,4 +53,6 @@ public class TreningController {
         }
         return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
     }
+
+
 }
