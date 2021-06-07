@@ -33,7 +33,7 @@ public class KorisnikController {
         korisnikDTO.setLozinka(korisnik.getLozinka());
         korisnikDTO.setIme(korisnik.getIme());
         korisnikDTO.setPrezime(korisnik.getPrezime());
-        korisnikDTO.setKontaktTelefon(korisnikDTO.getKontaktTelefon());
+        korisnikDTO.setKontaktTelefon(korisnik.getKontaktTelefon());
         korisnikDTO.seteMail(korisnik.geteMail());
         korisnikDTO.setDatumRodjenja(korisnik.getDatumRodjenja());
         korisnikDTO.setUloga(korisnik.getUloga());
