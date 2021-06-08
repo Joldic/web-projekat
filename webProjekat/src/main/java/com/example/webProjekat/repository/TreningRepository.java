@@ -2,6 +2,7 @@ package com.example.webProjekat.repository;
 
 import com.example.webProjekat.model.Trening;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -12,8 +13,10 @@ public interface TreningRepository extends JpaRepository<Trening, Long> {
 
     List<Trening> findByOpisOrderByOpisAsc(String opis);
 
-    List<Trening> findByTrajanjeOrderByTrajanjeAsc(Integer trajanje);     // ovo mozda i ne treba ***
+    List<Trening> findByTrajanjeOrderByTrajanjeAsc(Integer trajanje);
 
-    List<Trening> findByNazivContains(String naziv);
+    List<Trening> findByNaziv(String naziv);
+
+
 
 }

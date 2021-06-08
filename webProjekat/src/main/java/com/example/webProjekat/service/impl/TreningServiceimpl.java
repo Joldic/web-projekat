@@ -30,7 +30,8 @@ public class TreningServiceimpl implements TreningService {
     }
     @Override
     public List<Trening> findByName(String naziv){
-        List<Trening> trenings = this.treningRepository.findByNazivContains(naziv);
+        List<Trening> trenings = this.treningRepository.findByNaziv(naziv);
         return trenings;
     }
+
 }

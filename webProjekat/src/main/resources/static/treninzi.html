@@ -15,7 +15,10 @@
 <body>
     <div id="allTrenings">
         <h1>Trenings</h1>
-        <br><br>
+            <input type="text"  id="myInput" size="7" onkeyup="myFunction()" placeholder="Naziv"  >
+            
+        
+        <br><br>    
         <div class="container">
             <table id="trenings">
                 <tr>
@@ -28,5 +31,25 @@
         </div>
     </div>
 
+    <script>
+        function myFunction() {
+          var input, filter, table, tr, tdNaziv, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("trenings");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            tdNaziv = tr[i].getElementsByTagName("td")[0];
+            if (tdNaziv) {
+              txtValue = tdNaziv.textContent || tdNaziv.innerText; 
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
 </body>
 </html>

@@ -10,4 +10,5 @@ public interface TreningService {
     List<Trening> findAll();
 
     List<Trening> findByName(String naziv);
+
 }

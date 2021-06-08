@@ -4,9 +4,11 @@ import com.example.webProjekat.model.Trening;
 import com.example.webProjekat.model.dto.TreningDTO;
 import com.example.webProjekat.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -51,9 +53,9 @@ public class TreningController {
         return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/naziv/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Trening> getTreningByName(@PathVariable("name") String name){
-        return treningService.findByName(name);
+    @GetMapping("/naziv")
+    public List<Trening> getTreningsByNaziv(@RequestParam String naziv){
+        return treningService.findByName(naziv);
     }
 
 }
