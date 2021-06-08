@@ -14,4 +14,6 @@ public interface TreningRepository extends JpaRepository<Trening, Long> {
 
     List<Trening> findByTrajanjeOrderByTrajanjeAsc(Integer trajanje);     // ovo mozda i ne treba ***
 
+    List<Trening> findByNazivContains(String naziv);
+
 }

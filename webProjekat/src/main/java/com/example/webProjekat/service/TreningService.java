@@ -8,4 +8,6 @@ public interface TreningService {
     Trening findOne(Long id);
 
     List<Trening> findAll();
+
+    List<Trening> findByName(String naziv);
 }

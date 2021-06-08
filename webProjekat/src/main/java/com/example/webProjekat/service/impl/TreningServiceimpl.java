@@ -28,4 +28,9 @@ public class TreningServiceimpl implements TreningService {
         List<Trening> trenings = this.treningRepository.findAll();
         return  trenings;
     }
+    @Override
+    public List<Trening> findByName(String naziv){
+        List<Trening> trenings = this.treningRepository.findByNazivContains(naziv);
+        return trenings;
+    }
 }
