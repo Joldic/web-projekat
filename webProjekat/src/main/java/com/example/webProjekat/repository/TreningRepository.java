@@ -7,16 +7,30 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TreningRepository extends JpaRepository<Trening, Long> {
-    List<Trening> findByNazivOrderByNazivAsc(String naziv);
-
-    List<Trening> findByTipTreningaOrderByTipTreningaAsc(String tipTreninga);
-
-    List<Trening> findByOpisOrderByOpisAsc(String opis);
-
-    List<Trening> findByTrajanjeOrderByTrajanjeAsc(Integer trajanje);
-
     List<Trening> findByNaziv(String naziv);
 
+    List<Trening> findByTipTreninga(String tipTreninga);
 
+    List<Trening> findByOpis(String opis);
+
+    List<Trening> findByTrajanje(Integer trajanje);
+
+    //sortiranja rastuca
+    List<Trening> findByOrderByTrajanjeAsc();
+
+    List<Trening> findByOrderByNazivAsc();
+
+    List<Trening> findByOrderByTipTreningaAsc();
+
+    List<Trening> findByOrderByOpisAsc();
+
+    //sortiranja opadajuca
+    List<Trening> findByOrderByTrajanjeDesc();
+
+    List<Trening> findByOrderByNazivDesc();
+
+    List<Trening> findByOrderByTipTreningaDesc();
+
+    List<Trening> findByOrderByOpisDesc();
 
 }

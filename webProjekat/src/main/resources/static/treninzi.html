@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <script>
+    <script>//w3 schools 
         function myFunction() {
           var input, filter, table, tr, tdNaziv, i, txtValue;
           input = document.getElementById("myInput");
@@ -39,7 +39,7 @@
           table = document.getElementById("trenings");
           tr = table.getElementsByTagName("tr");
           for (i = 0; i < tr.length; i++) {
-            tdNaziv = tr[i].getElementsByTagName("td")[0];
+            tdNaziv = tr[i].getElementsByTagName("td")[0]; // 0 zato sto je naziv prva kolona tabele
             if (tdNaziv) {
               txtValue = tdNaziv.textContent || tdNaziv.innerText; 
               if (txtValue.toUpperCase().indexOf(filter) > -1) {

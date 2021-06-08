@@ -1,8 +1,10 @@
 package com.example.webProjekat.controller;
 
 import com.example.webProjekat.model.Trening;
+import com.example.webProjekat.model.dto.FitnessCentarDTO;
 import com.example.webProjekat.model.dto.TreningDTO;
 import com.example.webProjekat.service.TreningService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -53,9 +55,97 @@ public class TreningController {
         return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
     }
 
-    @GetMapping("/naziv")
-    public List<Trening> getTreningsByNaziv(@RequestParam String naziv){
-        return treningService.findByName(naziv);
+
+    @GetMapping("/trajanjeASC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByTrajanje(){
+        List<Trening> treningList = this.treningService.findBySortTrajanje();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+    @GetMapping("/trajanjeDESC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByTrajanjeDesc(){
+        List<Trening> treningList = this.treningService.findBySortTrajanjeDesc();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/nazivASC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByNaziv(){
+        List<Trening> treningList = this.treningService.findBySortNaziv();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+    @GetMapping("/nazivDESC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByNazivDesc(){
+        List<Trening> treningList = this.treningService.findBySortNazivDesc();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/opisASC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByOpis(){
+        List<Trening> treningList = this.treningService.findBySortOpis();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+    @GetMapping("/opisDESC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByOpisDesc(){
+        List<Trening> treningList = this.treningService.findBySortOpisDesc();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/tipTreningaASC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByTipTreninga(){
+        List<Trening> treningList = this.treningService.findBySortTipTreninga();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+    @GetMapping("/tipTreningaDESC")
+    public ResponseEntity<List<TreningDTO>> getTreningsSortedByTipTreningaDesc(){
+        List<Trening> treningList = this.treningService.findBySortTipTreningaDesc();
+
+        List<TreningDTO> treningDTOS = new ArrayList<>();
+        for(Trening trening: treningList){
+            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+            treningDTOS.add(treningDTO);
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
     }
 
 }
