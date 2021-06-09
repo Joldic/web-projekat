@@ -17,7 +17,7 @@ $(document).on("submit", "form", function(event){
             if(res.uloga == "ADMINISTRATOR"){
                 window.location.href = "NOVASTRANICA.html";
             }else{
-                windows.location.href = "KORISNIKSTRANICA.html";
+                window.location.href = "KORISNIKSTRANICA.html";
             }    
         },
         error: function(res){
