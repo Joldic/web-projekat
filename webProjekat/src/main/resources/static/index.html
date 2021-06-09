@@ -5,21 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/login.js"></script>
+    
 </head>
 
 <body>
-    <h1>Dobrodosli u fitness centar</h1>
+  <!--  <h1>Dobrodosli u fitness centar</h1>
     <a type="button" href="fitnessCentar.html" class="btn">Show fitness centars</a>
     <br><br>
     <a type="button" href="treninzi.html" class="btn">Show trenings</a>
     <br><br>
     <a type="button" href="treneriZahtevi.html" class="btn">Show requests for registration</a>
-    <br><br>
-    <a type="button" href="registracijaKorisnika.html" class="btn">Registruj se kao clan</a>
+    <br><br> -->
+ <!--   <a type="button" href="registracijaKorisnika.html" class="btn">Registruj se kao clan</a>
     <br><br>
     <a type="button" href="registracijaTrenera.html" class="btn">Registruj se kao trener</a>
-    <br><br>
-    <a type="button" href="login.html" class="btn">Login</a>
+    <br><br> -->
+  <!--  <a type="button" href="login.html" class="btn">Login</a> -->
+
+    <!-- ovo dole je novo-->
+    <form id="form" class="box" >
+        <h1>Prijava</h1>
+        <label for="korisnickoIme"></label>
+        <input type="text" id="korisnickoIme" name="" placeholder="Korisnicko ime">
+        <label for="lozinka"></label>
+        <input type="password" id="lozinka" name="" placeholder="Lozinka">
+        <label for="prijava"></label>
+        <input type="submit" name="" value="Prijavite se">
+        <br><br>
+        <a href="registracijaTrenera.html">Registracija trenera</a>
+        <a href="registracijaKorisnika.html">registracijaKorisnika</a>
+    </form>
+    
 
 </body>
 </html>

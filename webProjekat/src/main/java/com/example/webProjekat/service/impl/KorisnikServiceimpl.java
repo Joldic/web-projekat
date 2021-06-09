@@ -62,4 +62,15 @@ public class KorisnikServiceimpl implements KorisnikService {
         return newKorisnik;
     }
 
+    @Override
+    public  Korisnik findUsernamePassword(String korisnickoIme, String lozinka){
+        Korisnik korisnik = this.korisnikRepository.findByKorisnickoImeAndLozinka(korisnickoIme, lozinka);
+        return korisnik;
+    }
+
+    @Override
+    public List<Korisnik> findAll(){
+        return this.korisnikRepository.findAll();
+    }
+
 }

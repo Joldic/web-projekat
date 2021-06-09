@@ -31,7 +31,7 @@ $(document).on("submit", "form", function(event){
         data: JSON.stringify(newKorisnik),
         success: function(res){
             console.log(res);
-            window.location.href = "index.html";
+            window.location.href = "login.html";
         },
         error: function(){
             alert("Greska!");

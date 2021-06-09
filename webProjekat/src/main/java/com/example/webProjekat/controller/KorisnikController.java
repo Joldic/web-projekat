@@ -114,5 +114,17 @@ public class KorisnikController {
         return new ResponseEntity<>(newKorisnikDTO, HttpStatus.CREATED);
 
     }
+    @GetMapping(value="/{korisnickoIme}/{lozinka}",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> checkKorisnik(@PathVariable String korisnickoIme, @PathVariable String lozinka) {
+        Korisnik korisnik = this.korisnikService.findUsernamePassword(korisnickoIme, lozinka);
 
+        if(korisnik == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  //404 not found
+        }
+
+        KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),korisnik.getLozinka(),korisnik.getIme(), korisnik.getPrezime(),
+                korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(),korisnik.getUloga(), korisnik.getAktivan(), korisnik.getProsecnaOcena());
+
+        return new ResponseEntity<>(korisnikDTO, HttpStatus.OK);
+    }
 }

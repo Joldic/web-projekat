@@ -15,5 +15,9 @@ public interface KorisnikService {
 
     Korisnik createTrener(Korisnik korisnik) throws Exception;
 
+    Korisnik findUsernamePassword(String korisnickoIme, String lozinka);
+
+    List<Korisnik> findAll();
+
     void delete(Long id);
 }

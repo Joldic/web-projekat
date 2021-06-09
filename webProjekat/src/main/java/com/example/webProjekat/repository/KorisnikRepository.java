@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
     List<Korisnik> findByAktivanAndUloga(Boolean aktivan, Uloga uloga);
+
+    Korisnik findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
 }
