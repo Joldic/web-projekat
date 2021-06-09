@@ -75,4 +75,44 @@ public class KorisnikController {
 
         return new ResponseEntity<>(updatedKorisnikDTO, HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteKorisnik(@PathVariable Long id){
+        this.korisnikService.delete(id);
+
+        //204 NO_content
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(value="/registracijaKorisnika", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> createKorisnik(@RequestBody KorisnikDTO korisnikDTO) throws Exception{
+
+        Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(),
+                korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.CLAN,false,
+                0.0);
+
+        Korisnik newKorisnik = korisnikService.create(korisnik);
+
+        KorisnikDTO newKorisnikDTO = new KorisnikDTO(newKorisnik.getId(), newKorisnik.getKorisnickoIme(),newKorisnik.getLozinka(), newKorisnik.getIme(),
+                newKorisnik.getPrezime(), newKorisnik.getKontaktTelefon(),newKorisnik.geteMail(),newKorisnik.getDatumRodjenja(),newKorisnik.getUloga(),
+                newKorisnik.getAktivan(),newKorisnik.getProsecnaOcena());
+
+        return new ResponseEntity<>(newKorisnikDTO, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value="/registracijaTrenera", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> createTrener(@RequestBody KorisnikDTO korisnikDTO) throws Exception{
+        Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(),
+                korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.TRENER,false,
+                0.0);
+        Korisnik newKorisnik = korisnikService.create(korisnik);
+
+        KorisnikDTO newKorisnikDTO = new KorisnikDTO(newKorisnik.getId(), newKorisnik.getKorisnickoIme(),newKorisnik.getLozinka(), newKorisnik.getIme(),
+                newKorisnik.getPrezime(), newKorisnik.getKontaktTelefon(),newKorisnik.geteMail(),newKorisnik.getDatumRodjenja(),newKorisnik.getUloga(),
+                newKorisnik.getAktivan(),newKorisnik.getProsecnaOcena());
+
+        return new ResponseEntity<>(newKorisnikDTO, HttpStatus.CREATED);
+
+    }
+
 }

@@ -17,7 +17,9 @@ $(document).ready(function(){
                 row += "<td>" + res[i].prosecnaOcena + "</td>";
 
                 let btn = "<button class='btnAccept' data-id=" + res[i].id + ">Prihvati</button>";
+                let btn2 = "<button class='btnReject' data-id=" + res[i].id + ">Odbij</button>";
                 row += "<td>" + btn + "</td>";
+                row += "<td>" + btn2 + "</td>";
 
                 row += "</tr>";
                 $('#zahtevi').append(row);
@@ -40,6 +42,23 @@ $(document).on('click', '.btnAccept', function(){
         contentType:"application/json",
         success: function(res){
             console.log("SUCCESS:\n", res);
+        },
+        error: function(res){
+            console.log("ERROR\n", res);
+        }
+    });
+});
+
+$(document).on('click', '.btnReject', function(){
+    let korId = this.dataset.id;
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8090/api/korisnik/" + korId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(res){
+            console.log("SUCCES:\n", res);
         },
         error: function(res){
             console.log("ERROR\n", res);

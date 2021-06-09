@@ -41,4 +41,25 @@ public class KorisnikServiceimpl implements KorisnikService {
         Korisnik savedKorisnik = this.korisnikRepository.save(korisnikToUpdate);
         return savedKorisnik;
     }
+    @Override
+    public void delete(Long id){this.korisnikRepository.deleteById(id);}
+
+    @Override
+    public Korisnik create(Korisnik korisnik) throws Exception{
+        if(korisnik.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        Korisnik newKorisnik = this.korisnikRepository.save(korisnik);
+        return newKorisnik;
+    }
+
+    @Override
+    public Korisnik createTrener(Korisnik korisnik) throws Exception{
+        if(korisnik.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        Korisnik newKorisnik = this.korisnikRepository.save(korisnik);
+        return newKorisnik;
+    }
+
 }

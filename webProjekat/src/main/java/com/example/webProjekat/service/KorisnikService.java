@@ -10,4 +10,10 @@ public interface KorisnikService {
     List<Korisnik> findZahtevi(Boolean aktivan, Uloga uloga);
 
     Korisnik update(Korisnik korisnik) throws Exception;
+
+    Korisnik create(Korisnik korisnik) throws Exception;
+
+    Korisnik createTrener(Korisnik korisnik) throws Exception;
+
+    void delete(Long id);
 }
