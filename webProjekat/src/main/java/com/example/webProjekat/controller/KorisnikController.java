@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +58,21 @@ public class KorisnikController {
         }
 
         return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
+    }
+
+    @PutMapping(value="/zahteviTreneri/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> updateKorisnik(@PathVariable("id") Long id) throws Exception{
+        Korisnik korisnik = this.korisnikService.findOne(id);
+
+        KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(),korisnik.getKorisnickoIme(),korisnik.getLozinka(),korisnik.getIme(),
+                korisnik.getPrezime(),korisnik.getKontaktTelefon(),korisnik.geteMail(),korisnik.getDatumRodjenja(),korisnik.getUloga(),korisnik.getAktivan(), korisnik.getProsecnaOcena());
+
+        Korisnik updatedKorisnik = korisnikService.update(korisnik);
+
+        KorisnikDTO updatedKorisnikDTO = new KorisnikDTO(updatedKorisnik.getId(), updatedKorisnik.getKorisnickoIme(),
+                updatedKorisnik.getLozinka(),updatedKorisnik.getIme(),updatedKorisnik.getPrezime(),updatedKorisnik.getKontaktTelefon(),
+                updatedKorisnik.geteMail(),updatedKorisnik.getDatumRodjenja(),updatedKorisnik.getUloga(),updatedKorisnik.getAktivan(),updatedKorisnik.getProsecnaOcena());
+
+        return new ResponseEntity<>(updatedKorisnikDTO, HttpStatus.OK);
     }
 }

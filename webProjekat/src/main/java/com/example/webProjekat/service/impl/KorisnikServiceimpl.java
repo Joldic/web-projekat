@@ -29,4 +29,16 @@ public class KorisnikServiceimpl implements KorisnikService {
         List<Korisnik> korisnici = this.korisnikRepository.findByAktivanAndUloga(aktivan, uloga);
         return korisnici;
     }
+
+    @Override
+    public Korisnik update(Korisnik korisnik) throws Exception{
+        Korisnik korisnikToUpdate = this.korisnikRepository.getOne(korisnik.getId());
+        if(korisnikToUpdate == null){
+            throw new Exception("Korisnik doesn't exist!");
+        }
+        korisnikToUpdate.setAktivan(true);
+
+        Korisnik savedKorisnik = this.korisnikRepository.save(korisnikToUpdate);
+        return savedKorisnik;
+    }
 }

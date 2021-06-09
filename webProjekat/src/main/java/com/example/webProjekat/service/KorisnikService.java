@@ -8,4 +8,6 @@ import java.util.List;
 public interface KorisnikService {
     Korisnik findOne(Long id);
     List<Korisnik> findZahtevi(Boolean aktivan, Uloga uloga);
+
+    Korisnik update(Korisnik korisnik) throws Exception;
 }
