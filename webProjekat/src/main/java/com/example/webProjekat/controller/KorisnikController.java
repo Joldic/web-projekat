@@ -1,6 +1,7 @@
 package com.example.webProjekat.controller;
 
 import com.example.webProjekat.model.Korisnik;
+import com.example.webProjekat.model.Uloga;
 import com.example.webProjekat.model.dto.KorisnikDTO;
 import com.example.webProjekat.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/korisnik")
@@ -41,5 +45,21 @@ public class KorisnikController {
         korisnikDTO.setProsecnaOcena(korisnik.getProsecnaOcena());
 
         return new ResponseEntity<>(korisnikDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/zahteviTreneri")
+    public ResponseEntity<List<KorisnikDTO>> getZahteviTreneri(){
+        List<Korisnik> korisnikList = this.korisnikService.findZahtevi(false, Uloga.TRENER);
+
+        List<KorisnikDTO> korisnikDTOS = new ArrayList<>();
+
+        for(Korisnik korisnik : korisnikList){
+            KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(), korisnik.getLozinka(),korisnik.getIme(),korisnik.getPrezime(),korisnik.getKontaktTelefon(),
+                    korisnik.geteMail(), korisnik.getDatumRodjenja(), korisnik.getUloga(), korisnik.getAktivan(), korisnik.getProsecnaOcena());
+
+            korisnikDTOS.add(korisnikDTO);
+        }
+
+        return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
     }
 }

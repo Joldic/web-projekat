@@ -1,0 +1,44 @@
+#table {
+    width: 100%;
+}
+
+h1 {
+    color: #d6eb1d;
+}
+
+h3 {
+    color: #d6eb1d;
+}
+
+#zahtevi th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #d6eb1d;
+    color: white;
+}
+
+#zahtevi td, #zahtevi th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#zahtevi tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#zahtevi tr:hover {
+    background-color: #ddd;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}

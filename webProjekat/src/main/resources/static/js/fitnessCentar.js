@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
 });
 
-//Kreiranje novog zaposlenog
+//Kreiranje novog fitness centra
 $(document).on("submit", "form", function(event){
     event.preventDefault();
 
