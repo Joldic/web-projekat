@@ -42,6 +42,7 @@ $(document).on('click', '.btnAccept', function(){
         contentType:"application/json",
         success: function(res){
             console.log("SUCCESS:\n", res);
+            location.reload();//da se sama refresuje
         },
         error: function(res){
             console.log("ERROR\n", res);
@@ -59,6 +60,7 @@ $(document).on('click', '.btnReject', function(){
         contentType: "application/json",
         success: function(res){
             console.log("SUCCES:\n", res);
+            location.reload();
         },
         error: function(res){
             console.log("ERROR\n", res);

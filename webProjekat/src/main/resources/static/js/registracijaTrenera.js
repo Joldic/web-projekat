@@ -31,7 +31,7 @@ $(document).on("submit", "form", function(event){
         data: JSON.stringify(newTrener),
         success: function(res){
             console.log(res);
-            window.location.href = "login.html";
+            window.location.href = "index.html";    //pisalo je login.html greskom
         },
         error: function(){
             alert("Greska!");

@@ -88,7 +88,7 @@ public class KorisnikController {
     public ResponseEntity<KorisnikDTO> createKorisnik(@RequestBody KorisnikDTO korisnikDTO) throws Exception{
 
         Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(),
-                korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.CLAN,false,
+                korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.CLAN,true,
                 0.0);
 
         Korisnik newKorisnik = korisnikService.create(korisnik);
@@ -121,10 +121,28 @@ public class KorisnikController {
         if(korisnik == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);  //404 not found
         }
-
+        if(!korisnik.getAktivan()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//ako nije aktivan
+        }
         KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),korisnik.getLozinka(),korisnik.getIme(), korisnik.getPrezime(),
                 korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(),korisnik.getUloga(), korisnik.getAktivan(), korisnik.getProsecnaOcena());
 
         return new ResponseEntity<>(korisnikDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/Uloga/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> getKorisnikIdUloga(@PathVariable("id") Long id){
+        Korisnik korisnik = this.korisnikService.findOne(id);
+      //  if(korisnik.getUloga() != Uloga.ADMINISTRATOR){
+       //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);//mozda i bad request treba
+      //  }
+        KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),korisnik.getLozinka(), korisnik.getIme(),
+                korisnik.getPrezime(), korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(), korisnik.getUloga(),
+                korisnik.getAktivan(), korisnik.getProsecnaOcena());
+        if(korisnik.getUloga() != Uloga.ADMINISTRATOR){
+            return new ResponseEntity<>(korisnikDTO, HttpStatus.NOT_FOUND);//mozda i bad request treba
+        }
+
+        return new ResponseEntity<>(korisnikDTO,HttpStatus.OK);
     }
 }

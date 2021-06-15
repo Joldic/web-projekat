@@ -25,6 +25,28 @@ $(document).ready(function(){
     });
 });
 
+
+$(document).on('click', '.addId', function(){
+    var korId = localStorage.getItem(("id"));
+    console.log(localStorage.getItem("id"));
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/korisnik/Uloga/" + korId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            alert("admin je na stranici");
+            window.location.href = "add-fintessCentar.html";
+        },
+        error: function (){
+            alert("Greska niste ADMIN");
+        }
+    });
+
+});
+
 //Kreiranje novog fitness centra
 $(document).on("submit", "form", function(event){
     event.preventDefault();
