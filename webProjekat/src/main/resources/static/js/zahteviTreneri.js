@@ -1,7 +1,8 @@
 $(document).ready(function(){
+    var korId = localStorage.getItem("id");
     $.ajax({
         type: "GET",
-        url:"http://localhost:8090/api/korisnik/zahteviTreneri",
+        url:"http://localhost:8090/api/korisnik/zahteviTrenerii/" + korId,
         dataType: "json",
         success: function(res){
             console.log("SUCCESS:\n", res);
@@ -27,6 +28,8 @@ $(document).ready(function(){
         },
         error: function(res){
             console.log("ERROR: \n", res);
+            alert("GRESKA NISTE ADMIN");
+            window.location.href="index.html";
         }
     });
 });

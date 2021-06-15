@@ -44,8 +44,10 @@ public class KorisnikController {
         return new ResponseEntity<>(korisnikDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/zahteviTreneri")
-    public ResponseEntity<List<KorisnikDTO>> getZahteviTreneri(){
+    @GetMapping(value="/zahteviTrenerii/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<KorisnikDTO>> getZahteviTreneri(@PathVariable("id") Long id){
+        Korisnik korisnikID = this.korisnikService.findOne(id);
+
         List<Korisnik> korisnikList = this.korisnikService.findZahtevi(false, Uloga.TRENER);
 
         List<KorisnikDTO> korisnikDTOS = new ArrayList<>();
@@ -56,7 +58,9 @@ public class KorisnikController {
 
             korisnikDTOS.add(korisnikDTO);
         }
-
+        if(korisnikID.getUloga() != Uloga.ADMINISTRATOR){
+            return new ResponseEntity<>(korisnikDTOS, HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
     }
 
