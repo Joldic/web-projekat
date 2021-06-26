@@ -2,6 +2,7 @@ package com.example.webProjekat.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,9 @@ public class Termin implements Serializable {
 
     @Column
     private Integer cena;
+
+    @Column
+    private LocalTime vremeTermina;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Trening trening;
