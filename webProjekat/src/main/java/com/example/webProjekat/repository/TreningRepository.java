@@ -15,22 +15,6 @@ public interface TreningRepository extends JpaRepository<Trening, Long> {
 
     List<Trening> findByTrajanje(Integer trajanje);
 
-    //sortiranja rastuca
-    List<Trening> findByOrderByTrajanjeAsc();
-
-    List<Trening> findByOrderByNazivAsc();
-
-    List<Trening> findByOrderByTipTreningaAsc();
-
-    List<Trening> findByOrderByOpisAsc();
-
-    //sortiranja opadajuca
-    List<Trening> findByOrderByTrajanjeDesc();
-
-    List<Trening> findByOrderByNazivDesc();
-
-    List<Trening> findByOrderByTipTreningaDesc();
-
-    List<Trening> findByOrderByOpisDesc();
+  
 
 }

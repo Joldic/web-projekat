@@ -5,6 +5,7 @@
     <title>Termini</title>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="css/termini.css" />
 
     <script src="js/termini.js"></script>
 </head>
@@ -12,13 +13,18 @@
     <div id="allTermins">
         <h1>Fitness Centri</h1>
 
+        Sortiraj:<br><br>
+        <input id="cenaASC" type="submit" value="Po Ceni Rastuce" />
+        <input id="cenaDESC" type="submit" value="Po Ceni Opadajuce" />
+        <input id="vremeASC" type="submit" value="Po Vremenu Rastuce" />
+        <input id="vremeDESC" type="submit" value="Po Vremenu Opadajuce" />
+
         <div class = "containter">
             <table id="idTermin">
                 <tr>
-                    <th>Naziv</th>
-                    <th>Adresa</th>
-                    <th>Broj telefona centrale</th>
-                    <th>Email</th>
+                    <th>BrojPrijavljenih</th>
+                    <th>Vreme</th>
+                    <th>Cena</th>
                 </tr>
             </table>
         </div>
