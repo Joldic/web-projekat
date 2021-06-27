@@ -1,21 +1,7 @@
 package com.example.webProjekat.model.dto;
 
 public class FitnessCentarDTO {
-    /*
-    private Long id;
 
-    @Column
-    private String naziv;
-
-    @Column
-    private String adresa;
-
-    @Column
-    private String brojTelefonaCentrale;
-
-    @Column
-    private String eMail;
-     */
     private Long id;
     private String naziv;
     private String adresa;

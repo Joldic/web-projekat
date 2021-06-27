@@ -13,8 +13,12 @@ $(document).ready(function(){
                 row += "<td>" + res[i].brojTelefonaCentrale + "</td>";
                 row += "<td>" + res[i].eMail + "</td>";
 
-               // let btn = "<button class=btnSeeMore data-id=" + res[i].id + ">SeeMore</button>";
-                //row += "<td>" + btn + "<td>";
+                let btn = "<button class='btnDelete' data-id=" + res[i].id + ">DELETE</button>";
+                let btn2 = "<button class='btnAddSala' data-id=" + res[i].id + ">Dodaj salu</button>";
+
+                row += "<td>" + btn + "</td>";
+                row += "<td>" + btn2 + "</td>";
+
                 row += "</tr>";
                 $('#fitnesscentar').append(row);
             }
@@ -24,6 +28,34 @@ $(document).ready(function(){
         }
     });
 });
+
+//brisanje fitness centra
+$(document).on('click', '.btnDelete', function(){
+    let fitnessCentarId = this.dataset.id;
+
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8090/api/fitnesscentar/" + fitnessCentarId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(res){
+            console.log("SUCCES:\n", res);
+            location.reload();
+        },
+        error: function(res){
+            console.log("ERROR\n", res);
+        }
+    });
+});
+
+//dodavanje sale za odabrani fintess centar
+$(document).on('click', '.btnAddSala', function(){
+    localStorage.setItem("fitnessId", this.dataset.id);
+    window.location.href = "addSala.html";
+});
+
+
 
 
 // $(document).on('click', '.addId', function(){

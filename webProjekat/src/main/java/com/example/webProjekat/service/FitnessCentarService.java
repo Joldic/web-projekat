@@ -11,4 +11,6 @@ public interface FitnessCentarService {
     List<FitnessCentar> findAll();
 
     FitnessCentar create(FitnessCentar fitnessCentar) throws Exception;
+
+    void delete(Long id);
 }

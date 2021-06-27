@@ -38,4 +38,9 @@ public class FitnessCentarServiceimpl implements FitnessCentarService {
         return newFitnessCentar;
     }
 
+    @Override
+    public void delete(Long id){
+        this.fitnessCentarRepository.deleteById(id);
+    }
+
 }

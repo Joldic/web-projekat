@@ -65,7 +65,12 @@ public class FitnessCentarController {
         return new ResponseEntity<>(newFitnessCentarDTO, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> deleteFitnessCentar(@PathVariable Long id){
+        this.fitnessCentarService.delete(id);
 
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 
 }
