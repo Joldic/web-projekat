@@ -2,6 +2,7 @@ package com.example.webProjekat.service;
 
 import com.example.webProjekat.model.Termin;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TerminService {
@@ -16,4 +17,5 @@ public interface TerminService {
     List<Termin> findBySortVremeASC();
 
     List<Termin> findBySortVremeDESC();
+
 }

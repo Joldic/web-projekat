@@ -2,6 +2,8 @@ package com.example.webProjekat.model.dto;
 
 import com.example.webProjekat.model.Trening;
 
+import java.time.LocalDateTime;
+
 public class TreningDTO {
     /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +25,31 @@ public class TreningDTO {
     private String opis;
     private String tipTreninga;
     private Integer trajanje;
+    ///////ovo je novo
+    private LocalDateTime vremeTermina;
+    private Integer cena;
 
     public TreningDTO(){
 
     }
 
-    public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje){
+//    public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje){
+//        this.id = id;
+//        this.naziv = naziv;
+//        this.opis = opis;
+//        this.tipTreninga = tipTreninga;
+//        this.trajanje = trajanje;
+//    }
+
+
+    public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje, LocalDateTime vremeTermina, Integer cena) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
         this.tipTreninga = tipTreninga;
         this.trajanje = trajanje;
+        this.vremeTermina = vremeTermina;
+        this.cena = cena;
     }
 
     public Long getId() {
@@ -74,5 +90,21 @@ public class TreningDTO {
 
     public void setTrajanje(Integer trajanje) {
         this.trajanje = trajanje;
+    }
+
+    public LocalDateTime getVremeTermina() {
+        return vremeTermina;
+    }
+
+    public void setVremeTermina(LocalDateTime vremeTermina) {
+        this.vremeTermina = vremeTermina;
+    }
+
+    public Integer getCena() {
+        return cena;
+    }
+
+    public void setCena(Integer cena) {
+        this.cena = cena;
     }
 }

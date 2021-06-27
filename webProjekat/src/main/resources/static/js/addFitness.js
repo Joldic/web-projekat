@@ -22,6 +22,7 @@ $(document).ready(function(){
 
 
 
+
 //kreiranje novog fitness centra
 $(document).on("submit", "form", function(event){
     event.preventDefault();

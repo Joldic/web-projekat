@@ -15,6 +15,6 @@ public interface TreningRepository extends JpaRepository<Trening, Long> {
 
     List<Trening> findByTrajanje(Integer trajanje);
 
-  
+
 
 }
