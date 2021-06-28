@@ -91,4 +91,19 @@ public class FitnessCentarController {
         return new ResponseEntity<>(salaDTOS, HttpStatus.OK);
     }
 
+    @PutMapping(value= "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FitnessCentarDTO> updateFC(@PathVariable Long id, @RequestBody FitnessCentarDTO fitnessCentarDTO) throws Exception{
+        FitnessCentar fitnessCentar = new FitnessCentar(fitnessCentarDTO.getNaziv(),fitnessCentarDTO.getAdresa(), fitnessCentarDTO.getBrojTelefonaCentrale(),
+                fitnessCentarDTO.geteMail() );
+
+        fitnessCentar.setId(id);
+
+        FitnessCentar updatedFC = this.fitnessCentarService.update(fitnessCentar);
+
+        FitnessCentarDTO updatedfcDTO = new FitnessCentarDTO(updatedFC.getId(), updatedFC.getNaziv(), updatedFC.getAdresa(), updatedFC.getBrojTelefonaCentrale(),
+                updatedFC.geteMail());
+
+        return new ResponseEntity<>(updatedfcDTO, HttpStatus.OK);
+    }
+
 }

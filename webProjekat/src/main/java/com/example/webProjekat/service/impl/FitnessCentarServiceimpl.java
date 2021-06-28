@@ -39,8 +39,25 @@ public class FitnessCentarServiceimpl implements FitnessCentarService {
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(Long id) {
         this.fitnessCentarRepository.deleteById(id);
+    }
+
+    @Override
+    public FitnessCentar update(FitnessCentar fitnessCentar) throws Exception{
+        FitnessCentar fcToUpdate = this.fitnessCentarRepository.getOne(fitnessCentar.getId());
+        if(fcToUpdate == null){
+            throw new Exception("FitnessCentar doesn't exist");
+        }
+
+        fcToUpdate.setAdresa(fitnessCentar.getAdresa());
+        fcToUpdate.seteMail(fitnessCentar.geteMail());
+        fcToUpdate.setNaziv(fitnessCentar.getNaziv());
+        fcToUpdate.setBrojTelefonaCentrale(fitnessCentar.getBrojTelefonaCentrale());
+
+        FitnessCentar savedFC = this.fitnessCentarRepository.save(fcToUpdate);
+
+        return savedFC;
     }
 
 }

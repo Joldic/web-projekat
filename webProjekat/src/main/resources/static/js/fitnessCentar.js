@@ -16,10 +16,12 @@ $(document).ready(function(){
                 let btn = "<button class='btnDelete' data-id=" + res[i].id + ">DELETE</button>";
                 let btn2 = "<button class='btnAddSala' data-id=" + res[i].id + ">Dodaj salu</button>";
                 let btn3 = "<button class='btnShowSale' data-id=" + res[i].id + ">Lista sala</button>";
+                let btn4 = "<button class='btnIzmeniFC' data-id=" + res[i].id + ">izmeniFC</button>";
 
                 row += "<td>" + btn + "</td>";
                 row += "<td>" + btn2 + "</td>";
                 row += "<td>" + btn3 + "</td>";
+                row += "<td>" + btn4 + "</td>";
 
                 row += "</tr>";
                 $('#fitnesscentar').append(row);
@@ -63,7 +65,10 @@ $(document).on('click', '.btnShowSale', function(){
     window.location.href = "listaSala.html";
 });
 
-
+$(document).on('click', '.btnIzmeniFC', function(){
+    localStorage.setItem("fitnessId", this.dataset.id);
+    window.location.href = "izmeniFitnessCentar.html";
+});
 
 // $(document).on('click', '.addId', function(){
 //     var korId = localStorage.getItem(("id"));
