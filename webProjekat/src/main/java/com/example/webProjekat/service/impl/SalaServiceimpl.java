@@ -7,6 +7,8 @@ import com.example.webProjekat.service.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SalaServiceimpl implements SalaService {
 
@@ -22,6 +24,25 @@ public class SalaServiceimpl implements SalaService {
         }
         Sala newSala = this.salaRepository.save(sala);
         return newSala;
+    }
+
+    @Override
+    public void delete(Long id) {this.salaRepository.deleteById(id);}
+
+    @Override
+    public List<Sala> findAll(){return this.salaRepository.findAll();}
+
+    @Override
+    public Sala update(Sala sala) throws Exception {
+        Sala salaToUpdate = this.salaRepository.getOne(sala.getId());
+        if(salaToUpdate == null){
+            throw new Exception("Sala doesnt exist");
+        }
+        salaToUpdate.setKapacitet(sala.getKapacitet());
+        salaToUpdate.setOznakaSale(sala.getOznakaSale());
+
+        Sala savedSala = this.salaRepository.save(salaToUpdate);
+        return savedSala;
     }
 
 }

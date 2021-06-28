@@ -12,6 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/sala")
 public class SalaController {
@@ -37,6 +40,42 @@ public class SalaController {
         SalaDTO newSalaDTO = new SalaDTO(newSala.getId(), newSala.getKapacitet(), newSala.getOznakaSale());
 
         return new ResponseEntity<>(newSalaDTO, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteSala(@PathVariable Long id){
+        this.salaService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+//    @GetMapping(value = "/lista/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<List<SalaDTO>> getSale(@PathVariable Long id){
+//        List<Sala> salaList = this.salaService.findAll();
+//
+//        List<SalaDTO> salaDTOS = new ArrayList<>();
+//
+//        for(Sala temp : salaList){
+//            FitnessCentar fitnessCentar = temp.getFitnessCentar();
+//            if(fitnessCentar.getId() == id){
+//                SalaDTO salaDTO = new SalaDTO(temp.getId(), temp.getKapacitet(), temp.getOznakaSale());
+//                salaDTOS.add(salaDTO);
+//            }
+//        }
+//
+//        return new ResponseEntity<>(salaDTOS, HttpStatus.OK);
+//    }
+
+    @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SalaDTO> updateSala(@PathVariable Long id, @RequestBody SalaDTO salaDTO) throws Exception{
+        Sala sala = new Sala(salaDTO.getKapacitet(), salaDTO.getOznakaSale());
+        sala.setId(id);
+
+        Sala updatedSala = this.salaService.update(sala);
+
+        SalaDTO updatedSalaDTO = new SalaDTO(updatedSala.getId(), updatedSala.getKapacitet(), updatedSala.getOznakaSale());
+
+        return new ResponseEntity<>(updatedSalaDTO, HttpStatus.OK);
     }
 
 }

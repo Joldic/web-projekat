@@ -2,7 +2,9 @@ package com.example.webProjekat.controller;
 
 
 import com.example.webProjekat.model.FitnessCentar;
+import com.example.webProjekat.model.Sala;
 import com.example.webProjekat.model.dto.FitnessCentarDTO;
+import com.example.webProjekat.model.dto.SalaDTO;
 import com.example.webProjekat.service.FitnessCentarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/fitnesscentar")
@@ -72,5 +76,19 @@ public class FitnessCentarController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value="listaSala/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<SalaDTO>> getSale(@PathVariable Long id){
+        FitnessCentar fitnessCentar = this.fitnessCentarService.findOne(id);
+        Set<Sala> salaList = fitnessCentar.getSale();
+
+        Set<SalaDTO> salaDTOS = new HashSet<>();
+
+        for(Sala sala : salaList){
+            SalaDTO salaDTO = new SalaDTO(sala.getId(), sala.getKapacitet(), sala.getOznakaSale());
+            salaDTOS.add(salaDTO);
+        }
+
+        return new ResponseEntity<>(salaDTOS, HttpStatus.OK);
+    }
 
 }

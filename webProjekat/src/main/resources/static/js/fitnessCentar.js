@@ -15,9 +15,11 @@ $(document).ready(function(){
 
                 let btn = "<button class='btnDelete' data-id=" + res[i].id + ">DELETE</button>";
                 let btn2 = "<button class='btnAddSala' data-id=" + res[i].id + ">Dodaj salu</button>";
+                let btn3 = "<button class='btnShowSale' data-id=" + res[i].id + ">Lista sala</button>";
 
                 row += "<td>" + btn + "</td>";
                 row += "<td>" + btn2 + "</td>";
+                row += "<td>" + btn3 + "</td>";
 
                 row += "</tr>";
                 $('#fitnesscentar').append(row);
@@ -55,6 +57,11 @@ $(document).on('click', '.btnAddSala', function(){
     window.location.href = "addSala.html";
 });
 
+//prikaz liste sala
+$(document).on('click', '.btnShowSale', function(){
+    localStorage.setItem("fitnessId", this.dataset.id);
+    window.location.href = "listaSala.html";
+});
 
 
 
@@ -116,3 +123,25 @@ $(document).on('click', '.addId', function(){
 //     });
 //
 // });
+
+
+
+//ovo mi sluzi da treneri i clanovi ne bi mogli da brisu fitness centre
+$(document).ready(function(){
+    var korId = localStorage.getItem("id");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/korisnik/Uloga/" + korId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            alert("admin je na stranici");
+        },
+        error: function (){
+            alert("Greska niste ADMIN");
+            window.location.href = "index.html";
+        }
+    });
+});

@@ -15,6 +15,14 @@ public class SalaDTO {
         this.oznakaSale = oznakaSale;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Integer getKapacitet() {
         return kapacitet;
     }

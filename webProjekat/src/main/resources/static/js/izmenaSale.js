@@ -8,7 +8,7 @@ $(document).ready(function(){
         contentType: "application/json",
         success: function (res){
             console.log(res);
-            alert("admin je na stranici");
+           // alert("admin je na stranici");
         },
         error: function (){
             alert("Greska niste ADMIN");
@@ -21,7 +21,7 @@ $(document).ready(function(){
 $(document).on("submit", "form", function(event){
     event.preventDefault();
 
-    var fitnessID = localStorage.getItem("fitnessId");
+    var salaId = localStorage.getItem("salaId");
 
     var kapacitet = $("#kapacitet").val();
     var oznakaSale = $("#oznakaSale").val();
@@ -34,14 +34,14 @@ $(document).on("submit", "form", function(event){
     console.log(newSala);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8090/api/sala/" + fitnessID,
+        type: "PUT",
+        url: "http://localhost:8090/api/sala/" + salaId,
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newSala),
         success: function (res){
             console.log(res);
-            alert("Sala je uspesno kreirana");
+            alert("Sala je uspesno azurirana");
             window.location.href = "listaSala.html";
         },
         error: function(){

@@ -29,7 +29,7 @@ public class Sala implements Serializable {
     }
 
     public Sala(){
-        
+
     }
 
     public Long getId() {
