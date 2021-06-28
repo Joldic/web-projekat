@@ -28,6 +28,10 @@ public class Sala implements Serializable {
         this.oznakaSale = oznakaSale;
     }
 
+    public Sala(){
+        
+    }
+
     public Long getId() {
         return id;
     }
