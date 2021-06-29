@@ -13,4 +13,6 @@ public interface SalaService {
     List<Sala> findAll();
 
     Sala update(Sala sala) throws Exception;
+
+    Sala findOne(Long id);
 }

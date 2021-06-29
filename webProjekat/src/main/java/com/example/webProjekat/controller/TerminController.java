@@ -1,18 +1,19 @@
 package com.example.webProjekat.controller;
 
+import com.example.webProjekat.model.FitnessCentar;
+import com.example.webProjekat.model.Sala;
 import com.example.webProjekat.model.Termin;
 import com.example.webProjekat.model.Trening;
+import com.example.webProjekat.model.dto.SalaDTO;
 import com.example.webProjekat.model.dto.TerminDTO;
 import com.example.webProjekat.model.dto.TreningDTO;
+import com.example.webProjekat.service.SalaService;
 import com.example.webProjekat.service.TerminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,8 +23,10 @@ import java.util.List;
 @RequestMapping(value = "/api/termini")
 public class TerminController {
     private final TerminService terminService;
+    private final SalaService salaService;
+
     @Autowired
-    public TerminController(TerminService terminService){this.terminService = terminService;}
+    public TerminController(TerminService terminService, SalaService salaService){this.terminService = terminService; this.salaService = salaService;}
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getTermini(){
@@ -102,6 +105,39 @@ public class TerminController {
             terminDTOS.add(terminDTO);
         }
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+
+
+//    @PostMapping(value ="/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<SalaDTO> createSala(@RequestBody SalaDTO salaDTO, @PathVariable Long id) throws Exception{
+//        Sala sala = new Sala(salaDTO.getKapacitet(), salaDTO.getOznakaSale());
+//
+//        FitnessCentar tempFC = fitnessCentarService.findOne(id);
+//
+//        sala.setFitnessCentar(tempFC);
+//
+//        Sala newSala = salaService.create(sala);
+//
+//        SalaDTO newSalaDTO = new SalaDTO(newSala.getId(), newSala.getKapacitet(), newSala.getOznakaSale());
+//
+//        return new ResponseEntity<>(newSalaDTO, HttpStatus.CREATED);
+//    }
+    @PostMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> createTermin(@PathVariable Long id, @RequestBody TerminDTO terminDTO) throws Exception{
+        Termin termin = new Termin(terminDTO.getBrojPrijavljenihClanova(), terminDTO.getCena(), terminDTO.getVremeTermina());
+
+        Sala tempSala = this.salaService.findOne(id);
+        FitnessCentar fitnessCentar = tempSala.getFitnessCentar();
+
+        termin.setFitnessCentar(fitnessCentar);
+        termin.setSala(tempSala);
+
+        Termin newTermin = this.terminService.create(termin);
+
+        TerminDTO newTerminDTO = new TerminDTO(newTermin.getId(), newTermin.getBrojPrijavljenihClanova(),newTermin.getCena(), newTermin.getVremeTermina());
+
+        return new ResponseEntity<>(newTerminDTO, HttpStatus.CREATED);
     }
 
 

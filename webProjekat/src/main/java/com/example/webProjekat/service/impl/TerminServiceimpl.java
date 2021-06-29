@@ -44,4 +44,13 @@ public class TerminServiceimpl implements TerminService {
     @Override
     public List<Termin> findBySortVremeDESC(){return this.terminRepository.findByOrderByVremeTerminaDesc();}
 
+    @Override
+    public Termin create(Termin termin) throws Exception{
+        if(termin.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        Termin newTermin = this.terminRepository.save(termin);
+        return newTermin;
+    }
+
 }

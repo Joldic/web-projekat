@@ -34,6 +34,16 @@ public class Termin implements Serializable {
     @OneToMany(mappedBy = "termin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Prijava> prijave = new HashSet<>();
 
+    public Termin(Integer brojPrijavljenihClanova, Integer cena, LocalDateTime vremeTermina) {
+        this.brojPrijavljenihClanova = brojPrijavljenihClanova;
+        this.cena = cena;
+        this.vremeTermina = vremeTermina;
+    }
+
+    public Termin(){
+
+    }
+
     public Long getId() {
         return id;
     }

@@ -156,6 +156,23 @@ public class KorisnikController {
         return new ResponseEntity<>(korisnikDTO,HttpStatus.OK);
     }
 
+    @GetMapping(value="/Uloga/trener/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> getKorisnikIdUlogaTrener(@PathVariable("id") Long id){
+        Korisnik korisnik = this.korisnikService.findOne(id);
+        //  if(korisnik.getUloga() != Uloga.ADMINISTRATOR){
+        //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);//mozda i bad request treba
+        //  }
+        KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),korisnik.getLozinka(), korisnik.getIme(),
+                korisnik.getPrezime(), korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(), korisnik.getUloga(),
+                korisnik.getAktivan(), korisnik.getProsecnaOcena());
+        if(korisnik.getUloga() != Uloga.TRENER){
+            return new ResponseEntity<>(korisnikDTO, HttpStatus.NOT_FOUND);//mozda i bad request treba
+        }
+
+        return new ResponseEntity<>(korisnikDTO,HttpStatus.OK);
+    }
+
+
     @GetMapping(value="lista/treneri", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<KorisnikDTO>> getTreneri(){
         List<Korisnik> korisnikList = this.korisnikService.findAll();

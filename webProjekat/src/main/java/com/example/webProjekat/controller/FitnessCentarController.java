@@ -2,10 +2,12 @@ package com.example.webProjekat.controller;
 
 
 import com.example.webProjekat.model.FitnessCentar;
+import com.example.webProjekat.model.Korisnik;
 import com.example.webProjekat.model.Sala;
 import com.example.webProjekat.model.dto.FitnessCentarDTO;
 import com.example.webProjekat.model.dto.SalaDTO;
 import com.example.webProjekat.service.FitnessCentarService;
+import com.example.webProjekat.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +23,12 @@ import java.util.Set;
 @RequestMapping(value = "/api/fitnesscentar")
 public class FitnessCentarController {
     private final FitnessCentarService fitnessCentarService;
+    private final KorisnikService korisnikService;
 
     @Autowired
-    public FitnessCentarController(FitnessCentarService fitnessCentarService){
+    public FitnessCentarController(FitnessCentarService fitnessCentarService, KorisnikService korisnikService){
         this.fitnessCentarService = fitnessCentarService;
+        this.korisnikService = korisnikService;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,6 +94,28 @@ public class FitnessCentarController {
 
         return new ResponseEntity<>(salaDTOS, HttpStatus.OK);
     }
+
+
+    @GetMapping(value="listaSala/trener/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<SalaDTO>> getSaleTermin(@PathVariable Long id){
+
+        Korisnik korisnik = this.korisnikService.findOne(id);
+
+        FitnessCentar fitnessCentar = korisnik.getFitnessCentar();
+        Set<Sala> salaList = fitnessCentar.getSale();
+
+        Set<SalaDTO> salaDTOS = new HashSet<>();
+
+        for(Sala sala : salaList){
+            SalaDTO salaDTO = new SalaDTO(sala.getId(), sala.getKapacitet(), sala.getOznakaSale());
+            salaDTOS.add(salaDTO);
+        }
+
+        return new ResponseEntity<>(salaDTOS, HttpStatus.OK);
+    }
+
+
+
 
     @PutMapping(value= "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FitnessCentarDTO> updateFC(@PathVariable Long id, @RequestBody FitnessCentarDTO fitnessCentarDTO) throws Exception{

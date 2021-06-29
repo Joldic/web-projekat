@@ -45,4 +45,8 @@ public class SalaServiceimpl implements SalaService {
         return savedSala;
     }
 
+    @Override
+    public Sala findOne(Long id){
+        return this.salaRepository.getOne(id);
+    }
 }

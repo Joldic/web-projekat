@@ -18,4 +18,6 @@ public interface TerminService {
 
     List<Termin> findBySortVremeDESC();
 
+    Termin create(Termin termin) throws Exception;
+
 }
