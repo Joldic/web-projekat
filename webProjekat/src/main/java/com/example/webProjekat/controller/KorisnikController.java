@@ -114,7 +114,7 @@ public class KorisnikController {
         if(tempK.getUloga() == Uloga.ADMINISTRATOR){
             korisnik.setAktivan(true);
         }
-        
+
         Korisnik newKorisnik = korisnikService.create(korisnik);
 
         KorisnikDTO newKorisnikDTO = new KorisnikDTO(newKorisnik.getId(), newKorisnik.getKorisnickoIme(),newKorisnik.getLozinka(), newKorisnik.getIme(),
@@ -155,4 +155,24 @@ public class KorisnikController {
 
         return new ResponseEntity<>(korisnikDTO,HttpStatus.OK);
     }
+
+    @GetMapping(value="lista/treneri", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<KorisnikDTO>> getTreneri(){
+        List<Korisnik> korisnikList = this.korisnikService.findAll();
+
+        List<KorisnikDTO> korisnikDTOS = new ArrayList<>();
+
+        for(Korisnik korisnik : korisnikList){
+            if(korisnik.getUloga() == Uloga.TRENER && korisnik.getAktivan() == true){
+                KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(), korisnik.getLozinka(), korisnik.getIme(),
+                        korisnik.getPrezime(), korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(), korisnik.getUloga(), korisnik.getAktivan(),
+                        korisnik.getProsecnaOcena());
+
+                korisnikDTOS.add(korisnikDTO);
+            }
+        }
+
+        return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
+    }
+
 }
