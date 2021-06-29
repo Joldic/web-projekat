@@ -8,7 +8,7 @@ $(document).ready(function(){
         contentType: "application/json",
         success: function (res){
             console.log(res);
-            alert("admin je na stranici");
+           // alert("admin je na stranici");
         },
         error: function (){
             alert("Greska niste ADMIN");
@@ -42,7 +42,7 @@ $(document).on("submit", "form", function(event){
         success: function (res){
             console.log(res);
             alert("Sala je uspesno kreirana");
-            window.location.href = "listaSala.html";
+            window.location.href = "fitnessCentar.html";
         },
         error: function(){
             alert("Greska!");

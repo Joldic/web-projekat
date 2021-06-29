@@ -142,7 +142,7 @@ $(document).ready(function(){
         contentType: "application/json",
         success: function (res){
             console.log(res);
-            alert("admin je na stranici");
+           // alert("admin je na stranici");
         },
         error: function (){
             alert("Greska niste ADMIN");

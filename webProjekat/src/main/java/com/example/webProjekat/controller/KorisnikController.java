@@ -104,11 +104,17 @@ public class KorisnikController {
         return new ResponseEntity<>(newKorisnikDTO, HttpStatus.CREATED);
     }
 
-    @PostMapping(value="/registracijaTrenera", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<KorisnikDTO> createTrener(@RequestBody KorisnikDTO korisnikDTO) throws Exception{
+    @PostMapping(value="/registracijaTrenera/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> createTrener(@PathVariable Long id, @RequestBody KorisnikDTO korisnikDTO) throws Exception{
         Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(),
                 korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.TRENER,false,
                 0.0);
+        Korisnik tempK = this.korisnikService.findOne(id);
+
+        if(tempK.getUloga() == Uloga.ADMINISTRATOR){
+            korisnik.setAktivan(true);
+        }
+        
         Korisnik newKorisnik = korisnikService.create(korisnik);
 
         KorisnikDTO newKorisnikDTO = new KorisnikDTO(newKorisnik.getId(), newKorisnik.getKorisnickoIme(),newKorisnik.getLozinka(), newKorisnik.getIme(),

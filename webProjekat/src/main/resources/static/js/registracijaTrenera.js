@@ -1,5 +1,6 @@
 $(document).on("submit", "form", function(event){
     event.preventDefault();
+    var korId = localStorage.getItem("id");
 
     var korisnickoIme = $("#korisnickoIme").val();
     var lozinka = $("#lozinka").val();
@@ -25,7 +26,7 @@ $(document).on("submit", "form", function(event){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8090/api/korisnik/registracijaTrenera",
+        url: "http://localhost:8090/api/korisnik/registracijaTrenera/" + korId ,
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(newTrener),
