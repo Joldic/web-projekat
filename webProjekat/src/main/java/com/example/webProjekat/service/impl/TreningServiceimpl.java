@@ -29,6 +29,14 @@ public class TreningServiceimpl implements TreningService {
         return  trenings;
     }
 
+    @Override
+    public  Trening create(Trening trening) throws Exception{
+        if(trening.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        Trening newTrening = this.treningRepository.save(trening);
+        return newTrening;
+    }
 
 
 

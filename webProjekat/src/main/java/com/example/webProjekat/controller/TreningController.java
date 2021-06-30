@@ -1,8 +1,10 @@
 package com.example.webProjekat.controller;
 
+import com.example.webProjekat.model.Korisnik;
 import com.example.webProjekat.model.Trening;
 import com.example.webProjekat.model.dto.FitnessCentarDTO;
 import com.example.webProjekat.model.dto.TreningDTO;
+import com.example.webProjekat.service.KorisnikService;
 import com.example.webProjekat.service.TreningService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,12 @@ import java.util.List;
 public class TreningController {
 
     private final TreningService treningService;
+    private final KorisnikService korisnikService;
 
     @Autowired
-    public TreningController(TreningService treningService){
+    public TreningController(TreningService treningService, KorisnikService korisnikService){
         this.treningService = treningService;
+        this.korisnikService = korisnikService;
     }
 
 //    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)      //dobavljanje po id-u
@@ -42,19 +46,35 @@ public class TreningController {
 //    }
 
     //dobavljanje liste svih treninga
-//    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<TreningDTO>> getTreninzi(){
-//        List<Trening> treningList = this.treningService.findAll();
-//
-//        List<TreningDTO> treningDTOS = new ArrayList<>();
-//
-//        for(Trening trening: treningList){
-//            TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
-//            treningDTOS.add(treningDTO);
-//        }
-//        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
-//    }
+    @GetMapping( value = "/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TreningDTO>> getTreninzi(@PathVariable Long korID){
+        List<Trening> treningList = this.treningService.findAll();
 
+        List<TreningDTO> treningDTOS = new ArrayList<>();
 
+        for(Trening trening: treningList){
+            if(trening.getKorisnik().getId() == korID) {
+                TreningDTO treningDTO = new TreningDTO(trening.getId(), trening.getNaziv(), trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+                treningDTOS.add(treningDTO);
+            }
+        }
+        return new ResponseEntity<>(treningDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{korID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TreningDTO> createTrening(@PathVariable Long korID, @RequestBody TreningDTO treningDTO) throws Exception{
+        Trening trening = new Trening(treningDTO.getNaziv(), treningDTO.getOpis(), treningDTO.getTipTreninga(), treningDTO.getTrajanje());
+
+        Korisnik korisnik = this.korisnikService.findOne(korID);
+
+        trening.setKorisnik(korisnik);
+
+        Trening newTrening = this.treningService.create(trening);
+
+        TreningDTO newTreningDTO = new TreningDTO(newTrening.getId(), newTrening.getNaziv(), newTrening.getOpis(), newTrening.getTipTreninga(), newTrening.getTrajanje());
+
+        return new ResponseEntity<>(newTreningDTO, HttpStatus.CREATED);
+
+    }
 
 }

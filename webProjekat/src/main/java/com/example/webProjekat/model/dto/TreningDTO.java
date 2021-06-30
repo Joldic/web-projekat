@@ -33,13 +33,13 @@ public class TreningDTO {
 
     }
 
-//    public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje){
-//        this.id = id;
-//        this.naziv = naziv;
-//        this.opis = opis;
-//        this.tipTreninga = tipTreninga;
-//        this.trajanje = trajanje;
-//    }
+    public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje){
+        this.id = id;
+        this.naziv = naziv;
+        this.opis = opis;
+        this.tipTreninga = tipTreninga;
+        this.trajanje = trajanje;
+    }
 
 
     public TreningDTO(Long id, String naziv, String opis, String tipTreninga, Integer trajanje, LocalDateTime vremeTermina, Integer cena) {

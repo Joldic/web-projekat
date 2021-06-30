@@ -9,6 +9,7 @@ import com.example.webProjekat.model.dto.TerminDTO;
 import com.example.webProjekat.model.dto.TreningDTO;
 import com.example.webProjekat.service.SalaService;
 import com.example.webProjekat.service.TerminService;
+import com.example.webProjekat.service.TreningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,9 +25,15 @@ import java.util.List;
 public class TerminController {
     private final TerminService terminService;
     private final SalaService salaService;
+    private final TreningService treningService;
 
     @Autowired
-    public TerminController(TerminService terminService, SalaService salaService){this.terminService = terminService; this.salaService = salaService;}
+    public TerminController(TerminService terminService, SalaService salaService, TreningService treningService){
+        this.terminService = terminService;
+        this.salaService = salaService;
+        this.treningService = treningService;
+
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getTermini(){
@@ -123,15 +130,17 @@ public class TerminController {
 //
 //        return new ResponseEntity<>(newSalaDTO, HttpStatus.CREATED);
 //    }
-    @PostMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TerminDTO> createTermin(@PathVariable Long id, @RequestBody TerminDTO terminDTO) throws Exception{
+    @PostMapping(value="/{id}/{treningID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> createTermin(@PathVariable Long id,@PathVariable Long treningID, @RequestBody TerminDTO terminDTO) throws Exception{
         Termin termin = new Termin(terminDTO.getBrojPrijavljenihClanova(), terminDTO.getCena(), terminDTO.getVremeTermina());
 
         Sala tempSala = this.salaService.findOne(id);
         FitnessCentar fitnessCentar = tempSala.getFitnessCentar();
+        Trening trening = this.treningService.findOne(treningID);
 
         termin.setFitnessCentar(fitnessCentar);
         termin.setSala(tempSala);
+        termin.setTrening(trening);
 
         Termin newTermin = this.terminService.create(termin);
 

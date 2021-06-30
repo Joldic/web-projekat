@@ -31,6 +31,17 @@ public class Trening implements Serializable { //dodati i Datum kao polje
     @OneToMany(mappedBy = "trening", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Termin> termini = new HashSet<>();
 
+    public Trening(String naziv, String opis, String tipTreninga, Integer trajanje) {
+        this.naziv = naziv;
+        this.opis = opis;
+        this.tipTreninga = tipTreninga;
+        this.trajanje = trajanje;
+    }
+
+    public Trening(){
+
+    }
+
     public Long getId() {
         return id;
     }

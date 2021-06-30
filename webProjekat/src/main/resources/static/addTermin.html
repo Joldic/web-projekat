@@ -6,6 +6,7 @@
 
   <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
+  <link rel="stylesheet" href="css/treninzi.css" />
 
   <script src="js/addTermin.js"></script>
 
@@ -22,7 +23,24 @@
       <input id="vremeTermina" type="datetime-local"/><br>
     </p>
 
-    <input type="submit" value="Add">
+    <br>
+    <button class="addTrening">Dodaj novi trening</button>
+    <br>
+
+    <div class="container">
+      <table id="trenings">
+        <tr>
+          <th>Naziv</th>
+          <th>Opis</th>
+          <th>Tip treninga</th>
+          <th>Trajanje</th>
+        </tr>
+      </table>
+    </div>
+
+
+
+    <input  type="submit" value="Add">
   </form>
 
 </body>

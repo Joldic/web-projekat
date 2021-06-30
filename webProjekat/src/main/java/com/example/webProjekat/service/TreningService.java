@@ -9,6 +9,6 @@ public interface TreningService {
 
     List<Trening> findAll();
 
-
+    Trening create(Trening trening) throws Exception;
 
 }
