@@ -17,6 +17,21 @@ public class Prijava implements Serializable {
     @Column
     private Integer ocena;
 
+    public Prijava(Boolean odradjen, Integer ocena) {
+        this.odradjen = odradjen;
+        this.ocena = ocena;
+    }
+
+    public Prijava(){
+
+    }
+
+    public Prijava(Long id, Boolean odradjen, Integer ocena) {
+        this.id = id;
+        this.odradjen = odradjen;
+        this.ocena = ocena;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Korisnik korisnik;
 

@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     $.ajax({
         type: "GET",
-        url:"http://localhost:8090/api/korisnik/Uloga/trener/" + korId,
+        url:"http://localhost:8090/api/korisnik/Uloga/clan/" + korId,
         dataType: "json",
         contentType: "application/json",
         success: function (res){
@@ -11,15 +11,14 @@ $(document).ready(function(){
             // alert("admin je na stranici");
         },
         error: function (){
-            alert("Greska niste TRENER");
+            alert("Greska niste CLAN");
             window.location.href = "index.html";
         }
     });
 });
 
-//prikaz svih sala za fitnes centar kom pripada nas trener
+//prikaz sala za taj fitness centar
 $(document).ready(function(){
-    var fitID = localStorage.getItem("fitnessId");
     var trenerId = localStorage.getItem("id");
 
     $.ajax({
@@ -35,11 +34,9 @@ $(document).ready(function(){
                 row += "<td>" + temp.kapacitet + "</td>";
 
 
-                let btn = "<button class='btnShowTermini' data-id=" + temp.id + ">Show termini</button>";
-                let btn2 = "<button class='btnAddTermin' data-id=" + temp.id + ">Add termin</button>";  //ovde mi se nalazi id sale
+                let btn = "<button class='btnShowTerm' data-id=" + temp.id + ">Show termini</button>";
 
                 row += "<td>" + btn + "</td>";
-                row += "<td>" + btn2 + "</td>";
 
                 row += "</tr>";
                 $('#sale').append(row);
@@ -51,13 +48,8 @@ $(document).ready(function(){
     });
 });
 
-//prikaz liste termina
-$(document).on('click', '.btnShowTermini', function(){
-    localStorage.setItem("salaId", this.dataset.id);
-    window.location.href = "listaTermina.html";
-});
 
-$(document).on('click', '.btnAddTermin', function(){
+$(document).on('click', '.btnShowTerm', function(){
     localStorage.setItem("salaId", this.dataset.id);
-    window.location.href = "addTermin.html";
+    window.location.href = "listaTerminaClan.html";
 });

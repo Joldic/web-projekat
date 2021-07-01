@@ -3,6 +3,7 @@ package com.example.webProjekat.controller;
 import com.example.webProjekat.model.FitnessCentar;
 import com.example.webProjekat.model.Sala;
 import com.example.webProjekat.model.Termin;
+import com.example.webProjekat.model.Trening;
 import com.example.webProjekat.model.dto.FitnessCentarDTO;
 import com.example.webProjekat.model.dto.SalaDTO;
 import com.example.webProjekat.model.dto.TerminDTO;
@@ -84,6 +85,25 @@ public class SalaController {
 
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/listaTerminaClan/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<TerminDTO>> getTerminiClan(@PathVariable Long id){
+        Sala sala = this.salaService.findOne(id);
+        Set<Termin> termini = sala.getTermini();
+
+        Set<TerminDTO> terminDTOS = new HashSet<>();
+
+        for(Termin termin : termini){
+            Trening trening = termin.getTrening();
+            TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getBrojPrijavljenihClanova(), termin.getCena(), termin.getVremeTermina(), trening.getNaziv(),
+                    trening.getOpis(), trening.getTipTreninga(), trening.getTrajanje());
+
+            terminDTOS.add(terminDTO);
+        }
+
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
 
     @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SalaDTO> updateSala(@PathVariable Long id, @RequestBody SalaDTO salaDTO) throws Exception{

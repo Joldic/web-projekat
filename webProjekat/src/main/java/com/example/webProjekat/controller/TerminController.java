@@ -114,7 +114,7 @@ public class TerminController {
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
     }
 
-    
+
     @PostMapping(value="/{id}/{treningID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TerminDTO> createTermin(@PathVariable Long id,@PathVariable Long treningID, @RequestBody TerminDTO terminDTO) throws Exception{
         Termin termin = new Termin(terminDTO.getBrojPrijavljenihClanova(), terminDTO.getCena(), terminDTO.getVremeTermina());
