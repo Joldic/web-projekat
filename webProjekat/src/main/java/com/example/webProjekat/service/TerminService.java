@@ -20,4 +20,6 @@ public interface TerminService {
 
     Termin create(Termin termin) throws Exception;
 
+    Termin update(Termin termin) throws Exception;
+
 }

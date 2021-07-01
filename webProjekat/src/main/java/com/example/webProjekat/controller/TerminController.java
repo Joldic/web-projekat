@@ -114,22 +114,7 @@ public class TerminController {
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
     }
 
-
-
-//    @PostMapping(value ="/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<SalaDTO> createSala(@RequestBody SalaDTO salaDTO, @PathVariable Long id) throws Exception{
-//        Sala sala = new Sala(salaDTO.getKapacitet(), salaDTO.getOznakaSale());
-//
-//        FitnessCentar tempFC = fitnessCentarService.findOne(id);
-//
-//        sala.setFitnessCentar(tempFC);
-//
-//        Sala newSala = salaService.create(sala);
-//
-//        SalaDTO newSalaDTO = new SalaDTO(newSala.getId(), newSala.getKapacitet(), newSala.getOznakaSale());
-//
-//        return new ResponseEntity<>(newSalaDTO, HttpStatus.CREATED);
-//    }
+    
     @PostMapping(value="/{id}/{treningID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TerminDTO> createTermin(@PathVariable Long id,@PathVariable Long treningID, @RequestBody TerminDTO terminDTO) throws Exception{
         Termin termin = new Termin(terminDTO.getBrojPrijavljenihClanova(), terminDTO.getCena(), terminDTO.getVremeTermina());
@@ -147,6 +132,18 @@ public class TerminController {
         TerminDTO newTerminDTO = new TerminDTO(newTermin.getId(), newTermin.getBrojPrijavljenihClanova(),newTermin.getCena(), newTermin.getVremeTermina());
 
         return new ResponseEntity<>(newTerminDTO, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/izmeniTermin/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> updateTermin(@PathVariable Long id, @RequestBody TerminDTO terminDTO) throws Exception{
+        Termin termin = new Termin(terminDTO.getCena(), terminDTO.getVremeTermina());
+        termin.setId(id);//postavim id
+
+        Termin updatedTermin = this.terminService.update(termin);
+
+        TerminDTO updatedTerminDTO = new TerminDTO(updatedTermin.getId(), updatedTermin.getBrojPrijavljenihClanova(), updatedTermin.getCena(), updatedTermin.getVremeTermina());
+
+        return new ResponseEntity<>(updatedTerminDTO, HttpStatus.OK);
     }
 
 

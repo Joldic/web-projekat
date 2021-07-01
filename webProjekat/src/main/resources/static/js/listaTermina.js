@@ -13,7 +13,11 @@ $(document).ready(function ()   {
                 row += "<td>" + res[i].cena + "</td>";
                 row += "<td>" + salaID + "</td>";
 
-
+                
+                let btn = "<button class='btnIzmeniTermin' data-id=" + res[i].id + ">Izmeni</button>";
+            
+                row += "<td>" + btn + "</td>";
+                
                 row += "</tr>";
                 $('#idTermin').append(row);
             }
@@ -22,4 +26,12 @@ $(document).ready(function ()   {
             console.log("ERROR: \n", res);
         }
     });
+});
+
+
+
+
+$(document).on('click', '.btnIzmeniTermin', function(){
+    localStorage.setItem("terminId", this.dataset.id);
+    window.location.href = "izmenaTermina.html";
 });

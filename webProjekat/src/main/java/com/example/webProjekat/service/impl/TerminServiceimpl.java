@@ -53,4 +53,18 @@ public class TerminServiceimpl implements TerminService {
         return newTermin;
     }
 
+    @Override
+    public Termin update(Termin termin) throws Exception{
+        Termin terminToUpdate = this.terminRepository.getOne(termin.getId());
+        if(terminToUpdate == null){
+            throw new Exception("Termin doesn't exist");
+        }
+
+        terminToUpdate.setCena(termin.getCena());
+        terminToUpdate.setVremeTermina(termin.getVremeTermina());
+
+        Termin savedTermin = this.terminRepository.save(terminToUpdate);
+        return savedTermin;
+    }
+
 }

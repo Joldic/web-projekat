@@ -40,6 +40,11 @@ public class Termin implements Serializable {
         this.vremeTermina = vremeTermina;
     }
 
+    public Termin(Integer cena, LocalDateTime vremeTermina) {
+        this.cena = cena;
+        this.vremeTermina = vremeTermina;
+    }
+
     public Termin(){
 
     }
