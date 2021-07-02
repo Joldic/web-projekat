@@ -4,6 +4,7 @@ import com.example.webProjekat.model.Korisnik;
 import com.example.webProjekat.model.Prijava;
 import com.example.webProjekat.model.Termin;
 import com.example.webProjekat.model.dto.PrijavaDTO;
+import com.example.webProjekat.model.dto.TerminDTO;
 import com.example.webProjekat.service.KorisnikService;
 import com.example.webProjekat.service.PrijavaService;
 import com.example.webProjekat.service.TerminService;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,7 +43,9 @@ public class PrijavaController {
 
         for(Prijava temp : prijave){        //ovim sprecavam da se isti clan prijavi za isti termin vise puta
             if(temp.getTermin().getId() == terminID && temp.getKorisnik().getId() == korID){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                //if(temp.getTermin().getSala().getId() == termin.getSala().getId()) { //ovaj if sluzi da ako je isti termin u dve razlicite sale
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                //}
             }
         }
 
@@ -62,4 +66,25 @@ public class PrijavaController {
 
         return new ResponseEntity<>(newPrijavaDTO, HttpStatus.CREATED);
     }
+
+    @GetMapping(value="/prijavljeni/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getPrijavljeni(@PathVariable Long korID){
+        List<Prijava> prijavaList = this.prijavaService.findAll();
+        List<TerminDTO> terminDTOS = new ArrayList<>();
+        for(Prijava prijava : prijavaList){
+            if(prijava.getKorisnik().getId() == korID){
+                if(prijava.getOdradjen() == false) {
+                    Termin temp = prijava.getTermin();
+                    TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje());
+
+                    terminDTOS.add(terminDTO);
+                }
+            }
+        }
+
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+
 }
