@@ -61,6 +61,17 @@ $(document).ready(function(){
 });
 
 $(document).on('click', '.btnPregledPrijavljeni', function(){
-    //localStorage.setItem("fitnessId", this.dataset.id);
     window.location.href = "pregledPrijavljeni.html";
+});
+
+$(document).on('click', '.btnPregledOdradjeni', function(){
+    window.location.href = "pregledOdradjeni.html";
+});
+
+$(document).on('click', '.btnPregledNeocenjeni', function(){
+    window.location.href = "pregledNeocenjeni.html";
+});
+
+$(document).on('click', '.btnOcenjeniOdradjeni', function(){
+    window.location.href = "pregledOO.html";
 });

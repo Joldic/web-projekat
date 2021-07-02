@@ -137,7 +137,7 @@ public class PrijavaController {
                 if(prijava.getOdradjen() == true && prijava.getOcena() != 0) {
                     Termin temp = prijava.getTermin();
                     TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
-                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId());
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId(), prijava.getOcena());
 
                     terminDTOS.add(terminDTO);
                 }
