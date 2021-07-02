@@ -154,5 +154,16 @@ public class PrijavaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PrijavaDTO> oceniPrijavu(@PathVariable Long id, @RequestBody Integer ocena) throws Exception{
+        Prijava prijava = this.prijavaService.findOne(id);
+        prijava.setOcena(ocena);
+
+        Prijava updatedPrijava = this.prijavaService.update(prijava);
+
+        PrijavaDTO updatedPrijavaDTO = new PrijavaDTO(updatedPrijava.getId(), updatedPrijava.getOdradjen(), updatedPrijava.getOcena());
+
+        return new ResponseEntity<>(updatedPrijavaDTO, HttpStatus.OK);
+    }
 
 }

@@ -37,4 +37,22 @@ public class PrijavaServiceimpl implements PrijavaService {
         this.prijavaRepository.deleteById(id);
     }
 
+    @Override
+    public Prijava findOne(Long id){
+        return this.prijavaRepository.getOne(id);
+    }
+
+    @Override
+    public Prijava update(Prijava prijava) throws Exception{
+        Prijava prijavaToUpdate = this.prijavaRepository.getOne(prijava.getId());
+        if(prijavaToUpdate == null){
+            throw new Exception("Prijava doesn't exist");
+        }
+
+        prijavaToUpdate.setOcena(prijava.getOcena());
+
+        Prijava savedPrijava = this.prijavaRepository.save(prijavaToUpdate);
+        return savedPrijava;
+    }
+
 }

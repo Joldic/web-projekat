@@ -52,3 +52,8 @@ $(document).ready(function ()   {
         }
     });
 });
+
+$(document).on('click', '.btnOceni', function(){
+    localStorage.setItem("prijavaId", this.dataset.id);
+    window.location.href = "oceni.html";
+});

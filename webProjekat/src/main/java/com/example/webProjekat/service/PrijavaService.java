@@ -10,4 +10,8 @@ public interface PrijavaService {
     List<Prijava> findAll();
 
     void delete(Long id);
+
+    Prijava findOne(Long id);
+
+    Prijava update(Prijava prijava) throws Exception;
 }
