@@ -14,6 +14,8 @@ public class TerminDTO {
     private String tipTreninga;
     private Integer trajanje;
 
+    private Long prijavaID;
+
 
     public TerminDTO(){
     }
@@ -34,6 +36,26 @@ public class TerminDTO {
         this.opis = opis;
         this.tipTreninga = tipTreninga;
         this.trajanje = trajanje;
+    }
+
+    public TerminDTO(Long id, Integer brojPrijavljenihClanova, Integer cena, LocalDateTime vremeTermina, String naziv, String opis, String tipTreninga, Integer trajanje, Long prijavaID) {
+        this.id = id;
+        this.brojPrijavljenihClanova = brojPrijavljenihClanova;
+        this.cena = cena;
+        this.vremeTermina = vremeTermina;
+        this.naziv = naziv;
+        this.opis = opis;
+        this.tipTreninga = tipTreninga;
+        this.trajanje = trajanje;
+        this.prijavaID = prijavaID;
+    }
+
+    public Long getPrijavaID() {
+        return prijavaID;
+    }
+
+    public void setPrijavaID(Long prijavaID) {
+        this.prijavaID = prijavaID;
     }
 
     public Long getId() {

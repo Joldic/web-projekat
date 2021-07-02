@@ -59,3 +59,8 @@ $(document).ready(function(){
         }
     });
 });
+
+$(document).on('click', '.btnPregledPrijavljeni', function(){
+    //localStorage.setItem("fitnessId", this.dataset.id);
+    window.location.href = "pregledPrijavljeni.html";
+});

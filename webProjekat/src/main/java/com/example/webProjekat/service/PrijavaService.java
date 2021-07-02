@@ -8,4 +8,6 @@ public interface PrijavaService {
     Prijava create(Prijava prijava) throws Exception;
 
     List<Prijava> findAll();
+
+    void delete(Long id);
 }

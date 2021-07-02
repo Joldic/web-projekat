@@ -32,4 +32,9 @@ public class PrijavaServiceimpl implements PrijavaService {
         return this.prijavaRepository.findAll();
     }
 
+    @Override
+    public void delete(Long id){
+        this.prijavaRepository.deleteById(id);
+    }
+
 }

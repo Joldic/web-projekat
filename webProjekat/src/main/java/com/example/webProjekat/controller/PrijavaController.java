@@ -67,6 +67,7 @@ public class PrijavaController {
         return new ResponseEntity<>(newPrijavaDTO, HttpStatus.CREATED);
     }
 
+    //pregled prijavljenih a neodradjenih
     @GetMapping(value="/prijavljeni/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getPrijavljeni(@PathVariable Long korID){
         List<Prijava> prijavaList = this.prijavaService.findAll();
@@ -76,7 +77,7 @@ public class PrijavaController {
                 if(prijava.getOdradjen() == false) {
                     Termin temp = prijava.getTermin();
                     TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
-                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje());
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId());
 
                     terminDTOS.add(terminDTO);
                 }
@@ -84,6 +85,73 @@ public class PrijavaController {
         }
 
         return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+    //pregled odradjenih
+    @GetMapping(value="/odradjeni/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getOdradjeni(@PathVariable Long korID){
+        List<Prijava> prijavaList = this.prijavaService.findAll();
+        List<TerminDTO> terminDTOS = new ArrayList<>();
+        for(Prijava prijava : prijavaList){
+            if(prijava.getKorisnik().getId() == korID){
+                if(prijava.getOdradjen() == true) {
+                    Termin temp = prijava.getTermin();
+                    TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId());
+
+                    terminDTOS.add(terminDTO);
+                }
+            }
+        }
+
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+    //pregled odradjenih a neocenjenih
+    @GetMapping(value="/odradjeniNeocenjeni/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getOdradjeniNeocenjeni(@PathVariable Long korID){
+        List<Prijava> prijavaList = this.prijavaService.findAll();
+        List<TerminDTO> terminDTOS = new ArrayList<>();
+        for(Prijava prijava : prijavaList){
+            if(prijava.getKorisnik().getId() == korID){
+                if(prijava.getOdradjen() == true && prijava.getOcena() == 0) {
+                    Termin temp = prijava.getTermin();
+                    TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId());
+
+                    terminDTOS.add(terminDTO);
+                }
+            }
+        }
+
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+    //pregled odradjenih i ocenjenih
+    @GetMapping(value="/odradjeniOcenjeni/{korID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TerminDTO>> getOdradjeniOcenjeni(@PathVariable Long korID){
+        List<Prijava> prijavaList = this.prijavaService.findAll();
+        List<TerminDTO> terminDTOS = new ArrayList<>();
+        for(Prijava prijava : prijavaList){
+            if(prijava.getKorisnik().getId() == korID){
+                if(prijava.getOdradjen() == true && prijava.getOcena() != 0) {
+                    Termin temp = prijava.getTermin();
+                    TerminDTO terminDTO = new TerminDTO(temp.getId(), temp.getBrojPrijavljenihClanova(), temp.getCena(), temp.getVremeTermina(), temp.getTrening().getNaziv(),
+                            temp.getTrening().getOpis(), temp.getTrening().getTipTreninga(), temp.getTrening().getTrajanje(), prijava.getId());
+
+                    terminDTOS.add(terminDTO);
+                }
+            }
+        }
+
+        return new ResponseEntity<>(terminDTOS, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Void> deletePrijava(@PathVariable Long id){
+        this.prijavaService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
