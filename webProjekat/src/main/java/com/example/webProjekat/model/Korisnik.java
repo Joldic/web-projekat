@@ -54,6 +54,7 @@ public class Korisnik implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private FitnessCentar fitnessCentar;
 
+
     public Korisnik(String korisnickoIme, String lozinka, String ime, String prezime, String kontaktTelefon, String eMail, Date datumRodjenja, Uloga uloga, Boolean aktivan, Double prosecnaOcena) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -70,6 +71,8 @@ public class Korisnik implements Serializable {
     public Korisnik(){
 
     }
+
+
 
     public Long getId() {
         return id;

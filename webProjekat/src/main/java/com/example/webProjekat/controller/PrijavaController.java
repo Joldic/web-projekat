@@ -3,6 +3,7 @@ package com.example.webProjekat.controller;
 import com.example.webProjekat.model.Korisnik;
 import com.example.webProjekat.model.Prijava;
 import com.example.webProjekat.model.Termin;
+import com.example.webProjekat.model.Uloga;
 import com.example.webProjekat.model.dto.PrijavaDTO;
 import com.example.webProjekat.model.dto.TerminDTO;
 import com.example.webProjekat.service.KorisnikService;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -162,6 +164,41 @@ public class PrijavaController {
         Prijava updatedPrijava = this.prijavaService.update(prijava);
 
         PrijavaDTO updatedPrijavaDTO = new PrijavaDTO(updatedPrijava.getId(), updatedPrijava.getOdradjen(), updatedPrijava.getOcena());
+
+        //ovo mozda ne bude radilo
+        List<Prijava> prijavaList = this.prijavaService.findAll();
+
+        List<Korisnik> korisnikList = this.korisnikService.findAll();
+
+        Integer treneri[] = new Integer[1000];
+        Integer id_trener[] = new Integer[1000];
+
+        for(int i=0; i<1000; i++){
+            treneri[i] = 0;
+            id_trener[i] = 0;
+        }
+
+
+        for(Prijava prijavaTemp : prijavaList){
+            if(prijavaTemp.getOdradjen() == true && prijavaTemp.getOcena() != 0){
+                Korisnik korisnik = prijavaTemp.getTermin().getTrening().getKorisnik(); // sad sam nasao trenera koji je drzao taj trening koji je ocenjen
+                int c = korisnik.getId().intValue();
+                treneri[c] += prijavaTemp.getOcena();
+                id_trener[c]++;
+            }
+        }
+
+        for(int i=0; i<1000; i++){
+            if(treneri[i] != 0){
+                Long j = Long.valueOf(i);
+                Korisnik korisnik = this.korisnikService.findOne(j);
+                System.out.println(treneri[i]);
+                Double prosecna = (treneri[i] + 0.0)/(id_trener[i] + 0.0);
+                System.out.println(prosecna);
+                korisnik.setProsecnaOcena(prosecna);
+                this.korisnikService.update(korisnik);
+            }
+        }
 
         return new ResponseEntity<>(updatedPrijavaDTO, HttpStatus.OK);
     }

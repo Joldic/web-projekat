@@ -1,9 +1,11 @@
 package com.example.webProjekat.controller;
 
 import com.example.webProjekat.model.Korisnik;
+import com.example.webProjekat.model.Prijava;
 import com.example.webProjekat.model.Uloga;
 import com.example.webProjekat.model.dto.KorisnikDTO;
 import com.example.webProjekat.service.KorisnikService;
+import com.example.webProjekat.service.PrijavaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -208,5 +210,7 @@ public class KorisnikController {
 
         return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
     }
+
+
 
 }

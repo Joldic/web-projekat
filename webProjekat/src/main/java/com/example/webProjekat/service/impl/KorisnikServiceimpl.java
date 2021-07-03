@@ -37,6 +37,7 @@ public class KorisnikServiceimpl implements KorisnikService {
             throw new Exception("Korisnik doesn't exist!");
         }
         korisnikToUpdate.setAktivan(true);
+        korisnikToUpdate.setProsecnaOcena(korisnik.getProsecnaOcena());
 
         Korisnik savedKorisnik = this.korisnikRepository.save(korisnikToUpdate);
         return savedKorisnik;
