@@ -38,11 +38,11 @@ $(document).ready(function ()   {
 
                 
                 let btn = "<button class='btnOtkazi' data-id=" + res[i].prijavaID + ">OTKAZI</button>"; //ovde se cuva ID_prijave
-                
-                console.log(res[i].prijavaID);
-
+                let btn2 = "<button class='btnOdradi' data-id=" + res[i].prijavaID + ">Odradi</button>"; 
+                //console.log(res[i].prijavaID);
 
                 row += "<td>" + btn + "</td>";
+                row += "<td>" + btn2 + "</td>";
                 
                 row += "</tr>";
                 $('#idTermin').append(row);
@@ -61,6 +61,28 @@ $(document).on('click', '.btnOtkazi', function(){
         $.ajax({
             type: "DELETE",
             url: "http://localhost:8090/api/prijava/" + prijavaID,
+            dataType: "json",
+            contentType: "application/json",
+            success: function(res){
+                console.log("SUCCES:\n", res);
+                location.reload();
+            },
+            error: function(res){
+                console.log("ERROR\n", res);
+            }
+        });
+    
+});
+
+
+
+$(document).on('click', '.btnOdradi', function(){
+    prijavaID = this.dataset.id;
+
+   
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8090/api/prijava/odradi/" + prijavaID,
             dataType: "json",
             contentType: "application/json",
             success: function(res){

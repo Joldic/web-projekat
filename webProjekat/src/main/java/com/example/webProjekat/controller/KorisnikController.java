@@ -1,9 +1,11 @@
 package com.example.webProjekat.controller;
 
+import com.example.webProjekat.model.FitnessCentar;
 import com.example.webProjekat.model.Korisnik;
 import com.example.webProjekat.model.Prijava;
 import com.example.webProjekat.model.Uloga;
 import com.example.webProjekat.model.dto.KorisnikDTO;
+import com.example.webProjekat.service.FitnessCentarService;
 import com.example.webProjekat.service.KorisnikService;
 import com.example.webProjekat.service.PrijavaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,13 @@ import java.util.List;
 public class KorisnikController {
 
     private final KorisnikService korisnikService;
+    private final FitnessCentarService fitnessCentarService;
 
     @Autowired
-    public KorisnikController(KorisnikService korisnikService){
+    public KorisnikController(KorisnikService korisnikService, FitnessCentarService fitnessCentarService){
+
         this.korisnikService = korisnikService;
+        this.fitnessCentarService = fitnessCentarService;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,6 +101,10 @@ public class KorisnikController {
         Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(),
                 korisnikDTO.getKontaktTelefon(),korisnikDTO.geteMail(),korisnikDTO.getDatumRodjenja(),Uloga.CLAN,true,
                 0.0);
+
+        Long id = Long.valueOf(1);
+        FitnessCentar fitnessCentar = this.fitnessCentarService.findOne(id);
+        korisnik.setFitnessCentar(fitnessCentar);
 
         Korisnik newKorisnik = korisnikService.create(korisnik);
 
@@ -178,9 +187,7 @@ public class KorisnikController {
     @GetMapping(value="/Uloga/clan/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<KorisnikDTO> getKorisnikUlogaClan(@PathVariable("id") Long id){
         Korisnik korisnik = this.korisnikService.findOne(id);
-        //  if(korisnik.getUloga() != Uloga.ADMINISTRATOR){
-        //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);//mozda i bad request treba
-        //  }
+
         KorisnikDTO korisnikDTO = new KorisnikDTO(korisnik.getId(), korisnik.getKorisnickoIme(),korisnik.getLozinka(), korisnik.getIme(),
                 korisnik.getPrezime(), korisnik.getKontaktTelefon(), korisnik.geteMail(), korisnik.getDatumRodjenja(), korisnik.getUloga(),
                 korisnik.getAktivan(), korisnik.getProsecnaOcena());

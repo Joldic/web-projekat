@@ -203,4 +203,16 @@ public class PrijavaController {
         return new ResponseEntity<>(updatedPrijavaDTO, HttpStatus.OK);
     }
 
+    @PutMapping(value="/odradi/{id}")
+    public ResponseEntity<PrijavaDTO> odradiPrijava(@PathVariable Long id) throws Exception{
+        Prijava prijava = this.prijavaService.findOne(id);
+        prijava.setOdradjen(true);
+
+        Prijava updatedPrijava = this.prijavaService.update(prijava);
+
+        PrijavaDTO updatedPrijavaDTO = new PrijavaDTO(updatedPrijava.getId(), updatedPrijava.getOdradjen(), updatedPrijava.getOcena());
+
+        return new ResponseEntity<>(updatedPrijavaDTO, HttpStatus.OK);
+    }
+
 }
