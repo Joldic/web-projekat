@@ -4,122 +4,206 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/treninzi.css" />
+   <script type="text/javascript" src="js/jquery.min.js" ></script>
+<!--        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+        <script src="js/jquery.validate.min.js"></script>
+<!--    <script src="js/trenings.js"></script>-->
+        <script src="multifilter.js"></script>
+        <script src="multifilter.min.js"></script>
+
+
+
+
     <title>Treninzi</title>
-    <link rel="stylesheet" href="css/treninzi.css" />
-    <script src="js/jquery-3.6.0.min.js"></script>
 
-    <script src="js/jquery.validate.min.js"></script>
-
+   <script type="text/javascript">
+        $(document).ready(function() {
+            $('.filter').multifilter()
+        })
+   </script>
     <script src="js/trenings.js"></script>
-
 </head>
 <body>
-    <div id="allTrenings">
-        <h1>Trenings</h1>
-            <input type="text"  id="myInput" size="7" onkeyup="myFunction()" placeholder="Naziv"  >
-            <input type="text"  id="myInputOpis" size="7" onkeyup="myFunctionOpis()" placeholder="Opis"  >
-            <input type="text"  id="myInputTip" size="7" onkeyup="myFunctionTip()" placeholder="Tip"  >
-            <input type="text"  id="myInputTrajanje" size="7" onkeyup="myFunctionTrajanje()" placeholder="Trajanje"  >
 
 
-        <br><br>
-        <div class="container">
+
+   <h1>Trenings</h1>
+
+    <div class='container'>
+        <div class='filters'>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='name' placeholder='name' data-col='name'/>
+            </div>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='drink' placeholder='drink' data-col='drink'/>
+            </div>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='pizza' placeholder='pizza' data-col='pizza'/>
+            </div>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='movie' placeholder='movie' data-col='movie'/>
+            </div>
+            <div class='clearfix'></div>
+        </div>
+    </div>
+
+
             <table id="trenings">
-                <tr>
+
                     <th>Naziv</th>
                     <th>Opis</th>
                     <th>Tip treninga</th>
                     <th>Trajanje</th>
                     <th>Vreme Termina</th>
                     <th>Cena</th>
-                </tr>
-            </table>    
-        </div>
-    </div>
 
-    <script>//w3 schools 
-        function myFunction() {
-          var input, filter, table, tr, tdNaziv, i, txtValue;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("trenings");
-          tr = table.getElementsByTagName("tr");
-          for (i = 0; i < tr.length; i++) {
-            tdNaziv = tr[i].getElementsByTagName("td")[0]; // 0 zato sto je naziv prva kolona tabele
-            if (tdNaziv) {
-              txtValue = tdNaziv.textContent || tdNaziv.innerText; 
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            }
-          }
-        }
-    </script>
+            </table>
 
-    <script>//w3 schools 
-        function myFunctionOpis() {
-        var input, filter, table, tr, tdNaziv, i, txtValue;
-        input = document.getElementById("myInputOpis");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("trenings");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            tdNaziv = tr[i].getElementsByTagName("td")[1]; // 0 zato sto je naziv prva kolona tabele
-            if (tdNaziv) {
-            txtValue = tdNaziv.textContent || tdNaziv.innerText; 
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-            }
-        }
-        }
-    </script>
+<!--   <table>-->
+<!--       <thead>-->
+<!--       <th>Name</th>-->
+<!--       <th>Drink</th>-->
+<!--       <th>Pizza</th>-->
+<!--       <th>Movie</th>-->
+<!--       </thead>-->
+<!--       &lt;!&ndash; <tbody> &ndash;&gt;-->
+<!--       <tr>-->
+<!--           <td> Homer </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Marge </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Bart </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Black Dynamite </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Lisa </td>-->
+<!--           <td> Buzz Cola </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Iron Man </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Maggie </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Kent </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Hawaiian </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Patty </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Hawaiian </td>-->
+<!--           <td> District 9 </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Selma </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Otto </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Carl </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Lenny </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> Pacific Rim </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Stu </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Hawaiian </td>-->
+<!--           <td> Black Dynamite </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Eddie </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Lou </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Pacific Rim </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Ned </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> District 9 </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Barney </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Pacific Rim </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Moe </td>-->
+<!--           <td> Buzz Cola </td>-->
+<!--           <td> Hawaiian </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Julius </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Pacific Rim </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Jimbo </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Pepperoni </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Rod </td>-->
+<!--           <td> Duff Beer </td>-->
+<!--           <td> Magheritta </td>-->
+<!--           <td> Star Trek </td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td> Todd </td>-->
+<!--           <td> Squishie </td>-->
+<!--           <td> Hawaiian </td>-->
+<!--           <td> The Avengers </td>-->
+<!--       </tr>-->
+<!--       &lt;!&ndash; </tbody> &ndash;&gt;-->
+<!--   </table>-->
 
-    <script>//w3 schools 
-        function myFunctionTip() {
-        var input, filter, table, tr, tdNaziv, i, txtValue;
-        input = document.getElementById("myInputTip");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("trenings");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            tdNaziv = tr[i].getElementsByTagName("td")[2]; // 0 zato sto je naziv prva kolona tabele
-            if (tdNaziv) {
-            txtValue = tdNaziv.textContent || tdNaziv.innerText; 
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-            }
-        }
-        }
-    </script>
 
-    <script>//w3 schools 
-        function myFunctionTrajanje() {
-        var input, filter, table, tr, tdNaziv, i, txtValue;
-        input = document.getElementById("myInputTrajanje");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("trenings");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            tdNaziv = tr[i].getElementsByTagName("td")[3]; // 0 zato sto je naziv prva kolona tabele
-            if (tdNaziv) {
-            txtValue = tdNaziv.textContent || tdNaziv.innerText; 
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-            }
-        }
-        }
-    </script>
+
+   
+
+
+
+
 
 
 </body>

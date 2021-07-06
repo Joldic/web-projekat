@@ -42,3 +42,17 @@ h3 {
     color: grey;
     font-size: 18px;
 }
+
+
+.filters{
+    display: flex;
+    width: 640px;
+    margin-bottom: 15px;
+}
+.filters .filter-container{
+    width: 20%;
+    padding: 0 5px;
+}
+.filters .filter-container input{
+    width: 100%;
+}

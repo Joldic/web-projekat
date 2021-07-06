@@ -26,6 +26,7 @@
 
 $(document).ready(function ()   {
 
+
     $.ajax({
         type: "GET",
         url: "http://localhost:8090/api/termini/proba",
@@ -51,6 +52,10 @@ $(document).ready(function ()   {
     });
 });
 
+
+$(document).ready(function() {
+    $('.filter').multifilter();
+})
 
 
 
