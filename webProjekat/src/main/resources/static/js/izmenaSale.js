@@ -17,6 +17,27 @@ $(document).ready(function(){
     });
 });
 
+//autofil forma
+$(document).ready(function(){
+    var salaID = localStorage.getItem("salaId");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/sala/" + salaID,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            document.getElementById('kapacitet').value = res.kapacitet;
+            document.getElementById('oznakaSale').value = res.oznakaSale;
+        },
+        error: function (){
+            alert("Greska");
+            window.location.href = "index.html";
+        }
+    });
+});
+
 
 $(document).on("submit", "form", function(event){
     event.preventDefault();

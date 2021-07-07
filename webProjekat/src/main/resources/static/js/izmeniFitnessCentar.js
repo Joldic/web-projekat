@@ -17,6 +17,29 @@ $(document).ready(function(){
     });
 });
 
+//autofil forma
+$(document).ready(function(){
+    var fitnessID = localStorage.getItem("fitnessId");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/fitnesscentar/" + fitnessID,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            document.getElementById('naziv').value = res.naziv;
+            document.getElementById('adresa').value = res.adresa;
+            document.getElementById('brojTelefonaCentrale').value = res.brojTelefonaCentrale;
+            document.getElementById('eMail').value = res.eMail;
+        },
+        error: function (){
+            alert("Greska");
+            window.location.href = "index.html";
+        }
+    });
+});
+
 
 
 

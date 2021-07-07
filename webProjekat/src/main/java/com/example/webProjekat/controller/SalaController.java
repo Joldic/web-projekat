@@ -32,6 +32,15 @@ public class SalaController {
     public SalaController(SalaService salaService, FitnessCentarService fitnessCentarService){this.salaService = salaService; this.fitnessCentarService = fitnessCentarService;}
 
 
+    @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SalaDTO> getSalaId(@PathVariable Long id){
+        Sala sala = this.salaService.findOne(id);
+
+        SalaDTO salaDTO = new SalaDTO(sala.getId(), sala.getKapacitet(), sala.getOznakaSale());
+
+        return new ResponseEntity<>(salaDTO, HttpStatus.OK);
+    }
+
     @PostMapping(value ="/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SalaDTO> createSala(@RequestBody SalaDTO salaDTO, @PathVariable Long id) throws Exception{
         Sala sala = new Sala(salaDTO.getKapacitet(), salaDTO.getOznakaSale());
