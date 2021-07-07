@@ -218,6 +218,22 @@ public class KorisnikController {
         return new ResponseEntity<>(korisnikDTOS, HttpStatus.OK);
     }
 
+    @PutMapping(value = "izmeniProfil/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KorisnikDTO> updateClan(@PathVariable Long id, @RequestBody KorisnikDTO korisnikDTO) throws Exception{
+        Korisnik korisnik = new Korisnik(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka(), korisnikDTO.getIme(), korisnikDTO.getPrezime(), korisnikDTO.getKontaktTelefon(),
+                korisnikDTO.geteMail(), korisnikDTO.getDatumRodjenja(), Uloga.CLAN,  true, 0.0);
+
+        korisnik.setId(id);
+
+        Korisnik updatedKorisnik = this.korisnikService.update(korisnik);
+
+        KorisnikDTO updatedKorisnikDTO = new KorisnikDTO(updatedKorisnik.getId(), updatedKorisnik.getKorisnickoIme(), updatedKorisnik.getLozinka(), updatedKorisnik.getIme(),
+                updatedKorisnik.getPrezime(), updatedKorisnik.getKontaktTelefon(), updatedKorisnik.geteMail(), updatedKorisnik.getDatumRodjenja(), updatedKorisnik.getUloga(),
+                updatedKorisnik.getAktivan(), updatedKorisnik.getProsecnaOcena());
+
+        return new ResponseEntity<>(updatedKorisnikDTO, HttpStatus.OK);
+    }
+
 
 
 }

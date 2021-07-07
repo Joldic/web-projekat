@@ -42,11 +42,13 @@ $(document).ready(function(){
                 let btn2 = "<button class='btnPregledOdradjeni' data-id=" + res.id + ">Pregled odradjenih</button>";
                 let btn3 = "<button class='btnPregledNeocenjeni' data-id=" + res.id + ">Pregled neocenjeni</button>";
                 let btn4 = "<button class='btnOcenjeniOdradjeni' data-id=" + res.id + ">Ocenjeni odradjeni</button>";
+                let btn5 = "<button class='btnIzmeniProfil' data-id=" + res.id + ">Izmeni profil</button>";
 
                 row += "<td>" + btn + "</td>";
                 row += "<td>" + btn2 + "</td>";
                 row += "<td>" + btn3 + "</td>";
                 row += "<td>" + btn4 + "</td>";
+                row += "<td>" + btn5 + "</td>";
 
                 row += "</tr>";
                 $('#zahtevi').append(row);
