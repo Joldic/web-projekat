@@ -17,11 +17,6 @@
 
     <title>Treninzi</title>
 
-   <script type="text/javascript">
-        $(document).ready(function() {
-            $('.filter').multifilter()
-        })
-   </script>
     <script src="js/trenings.js"></script>
 </head>
 <body>
@@ -33,16 +28,22 @@
     <div class='container'>
         <div class='filters'>
             <div class='filter-container'>
-                <input autocomplete='off' class='filter' name='name' placeholder='name' data-col='name'/>
+                <input autocomplete='off' class='filter' name='naziv' placeholder='naziv' data-col='naziv'/>
             </div>
             <div class='filter-container'>
-                <input autocomplete='off' class='filter' name='drink' placeholder='drink' data-col='drink'/>
+                <input autocomplete='off' class='filter' name='opis' placeholder='opis' data-col='opis'/>
             </div>
             <div class='filter-container'>
-                <input autocomplete='off' class='filter' name='pizza' placeholder='pizza' data-col='pizza'/>
+                <input autocomplete='off' class='filter' name='Tip' placeholder='Tip' data-col='Tip'/>
             </div>
             <div class='filter-container'>
-                <input autocomplete='off' class='filter' name='movie' placeholder='movie' data-col='movie'/>
+                <input autocomplete='off' class='filter' name='trajanje' placeholder='trajanje' data-col='trajanje'/>
+            </div>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='Vreme' placeholder='Vreme' data-col='Vreme'/>
+            </div>
+            <div class='filter-container'>
+                <input autocomplete='off' class='filter' name='Cena' placeholder='Cena' data-col='Cena'/>
             </div>
             <div class='clearfix'></div>
         </div>
@@ -50,14 +51,17 @@
 
 
             <table id="trenings">
-
+                <thead>
                     <th>Naziv</th>
                     <th>Opis</th>
                     <th>Tip treninga</th>
                     <th>Trajanje</th>
                     <th>Vreme Termina</th>
                     <th>Cena</th>
+                </thead>
+                <tbody>
 
+                </tbody>
             </table>
 
 <!--   <table>-->

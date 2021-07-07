@@ -43,7 +43,8 @@ $(document).ready(function ()   {
                 row += "<td>" + res[i].cena + "</td>";
 
                 row += "</tr>";
-                $('#trenings').append(row);
+                $('tbody').append(row);
+                $('.filter').multifilter();
             }
         },
         error: function (res){
@@ -53,9 +54,7 @@ $(document).ready(function ()   {
 });
 
 
-$(document).ready(function() {
-    $('.filter').multifilter();
-})
+
 
 
 
