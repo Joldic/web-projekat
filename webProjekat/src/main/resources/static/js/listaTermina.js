@@ -1,3 +1,26 @@
+$(document).ready(function(){
+    var korId = localStorage.getItem("id");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/korisnik/Uloga/trener/" + korId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            // alert("admin je na stranici");
+        },
+        error: function (){
+            alert("Greska niste TRENER");
+            window.location.href = "index.html";
+        }
+    });
+});
+
+
+
+
+
 $(document).ready(function ()   {
     var salaID = localStorage.getItem("salaId");
     $.ajax({

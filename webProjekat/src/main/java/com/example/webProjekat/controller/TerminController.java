@@ -35,6 +35,15 @@ public class TerminController {
 
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TerminDTO> getTerminId(@PathVariable Long id){
+        Termin termin = this.terminService.findOne(id);
+
+        TerminDTO terminDTO = new TerminDTO(termin.getId(), termin.getBrojPrijavljenihClanova(), termin.getCena(), termin.getVremeTermina());
+
+        return new ResponseEntity<>(terminDTO, HttpStatus.OK);
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TerminDTO>> getTermini(){
         List<Termin> terminList = this.terminService.findAll();

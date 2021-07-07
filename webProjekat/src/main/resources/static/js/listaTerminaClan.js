@@ -77,6 +77,7 @@ $(document).on('click', '.btnPrijava', function(){
             console.log("SUCCES:\n", res);
             //location.reload();
             alert("PRIJAVA je uspesno kreirana");
+            location.reload();
         },
         error: function(res){
             console.log("ERROR\n", res);

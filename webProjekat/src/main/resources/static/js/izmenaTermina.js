@@ -1,3 +1,47 @@
+$(document).ready(function(){
+    var korId = localStorage.getItem("id");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/korisnik/Uloga/trener/" + korId,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            // alert("admin je na stranici");
+        },
+        error: function (){
+            alert("Greska niste TRENER");
+            window.location.href = "index.html";
+        }
+    });
+});
+
+//autofil forma
+$(document).ready(function(){
+    var terminID = localStorage.getItem("terminId");
+
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8090/api/termini/" + terminID,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res){
+            console.log(res);
+            document.getElementById('cena').value = res.cena;
+            document.getElementById('vremeTermina').value = res.vremeTermina;
+        },
+        error: function (){
+            alert("Greska");
+            window.location.href = "index.html";
+        }
+    });
+});
+
+
+
+
+
 $(document).on("submit", "form", function(event){
     event.preventDefault();
 
