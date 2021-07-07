@@ -77,3 +77,7 @@ $(document).on('click', '.btnPregledNeocenjeni', function(){
 $(document).on('click', '.btnOcenjeniOdradjeni', function(){
     window.location.href = "pregledOO.html";
 });
+
+$(document).on('click', '.btnIzmeniProfil', function(){
+    window.location.href = "izmeniProfil.html";
+});

@@ -74,4 +74,25 @@ public class KorisnikServiceimpl implements KorisnikService {
         return this.korisnikRepository.findAll();
     }
 
+    @Override
+    public Korisnik updateClan(Korisnik korisnik) throws  Exception{
+        Korisnik korisnikToUpdate = this.korisnikRepository.getOne(korisnik.getId());
+        if(korisnikToUpdate == null){
+            throw new Exception("Korisnik doesn't exist!");
+        }
+        korisnikToUpdate.setAktivan(true);
+        korisnikToUpdate.setProsecnaOcena(korisnik.getProsecnaOcena());
+
+        korisnikToUpdate.setKorisnickoIme(korisnik.getKorisnickoIme());
+        korisnikToUpdate.setLozinka(korisnik.getLozinka());
+        korisnikToUpdate.seteMail(korisnik.geteMail());
+        korisnikToUpdate.setIme(korisnik.getIme());
+        korisnikToUpdate.setPrezime(korisnik.getPrezime());
+        korisnikToUpdate.setKontaktTelefon(korisnik.getKontaktTelefon());
+        korisnikToUpdate.setDatumRodjenja(korisnik.getDatumRodjenja());
+
+        Korisnik savedKorisnik = this.korisnikRepository.save(korisnikToUpdate);
+        return savedKorisnik;
+    }
+
 }

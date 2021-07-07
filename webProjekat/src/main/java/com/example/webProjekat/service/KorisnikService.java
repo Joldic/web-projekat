@@ -11,6 +11,8 @@ public interface KorisnikService {
 
     Korisnik update(Korisnik korisnik) throws Exception;
 
+    Korisnik updateClan(Korisnik korisnik) throws Exception;
+
     Korisnik create(Korisnik korisnik) throws Exception;
 
     Korisnik createTrener(Korisnik korisnik) throws Exception;
