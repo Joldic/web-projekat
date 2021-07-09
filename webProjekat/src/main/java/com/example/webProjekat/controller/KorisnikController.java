@@ -125,6 +125,9 @@ public class KorisnikController {
         if(tempK.getUloga() == Uloga.ADMINISTRATOR){
             korisnik.setAktivan(true);
         }
+        Long kid = Long.valueOf(1);
+        FitnessCentar fitnessCentar = this.fitnessCentarService.findOne(kid);
+        korisnik.setFitnessCentar(fitnessCentar);
 
         Korisnik newKorisnik = korisnikService.create(korisnik);
 
